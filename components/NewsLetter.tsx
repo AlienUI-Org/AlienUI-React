@@ -1,4 +1,4 @@
-"use client";
+l"use client";
 import React from "react";
 import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
@@ -53,13 +53,13 @@ function NewsLetter() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full sm:w-2/3 px-4 py-3 rounded-md text-gray-800 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-brown-700"
+            className="w-full sm:w-2/3 px-4 py-3 rounded-md text-gray-800 bg-white border border-gray-300 focus:outline-none focus:ring-1 focus:ring-brown-700"
           />
           <button
             type="submit"
             className="px-6 py-3 bg-purple-800 font-medium text-white rounded-lg shadow-md "
           >
-            Subscribe
+         p   Subscribe
           </button>
         </form>
       </div>
