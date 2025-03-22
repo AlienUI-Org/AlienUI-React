@@ -59,7 +59,7 @@ function NewsLetter() {
             type="submit"
             className="px-6 py-3 bg-purple-800 font-medium text-white rounded-lg shadow-md "
           >
-         p   Subscribe
+            Subscribe
           </button>
         </form>
       </div>
