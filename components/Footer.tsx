@@ -12,10 +12,10 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col sm:flex-row justify-between items-center">
           <div className="text-center sm:text-left mb-6 sm:mb-0">
-            <h2 className="text-3xl font-semibold text-white">Aui</h2>
+            <h2 className="text-3xl font-semibold text-white">AuiR</h2>
             <p className="mt-2 text-white">
-              Empowering developers to build better mobile apps with
-              ready-to-use React Native UI components.
+              Empowering developers to build better web apps with ready-to-use
+              React UI components.
             </p>
           </div>
 
@@ -32,14 +32,14 @@ function Footer() {
             <Link href="https://github.com/khaymanii/alienui">
               <FaGithub size={24} className="text-white" />
             </Link>
-            <span className="font-medium text-md text-white">160⭐</span>
+            <span className="font-medium text-md text-white"></span>
           </div>
         </div>
         <div className="my-6 border-t border-white"></div>
 
         <div className="flex flex-col sm:flex-row justify-between items-center text-sm">
           <p className="text-white">
-            &copy; {new Date().getFullYear()} AlienUI. All rights reserved.
+            &copy; {new Date().getFullYear()} AlienUI Org. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 sm:mt-0">
             <Link href="#" className="text-white">

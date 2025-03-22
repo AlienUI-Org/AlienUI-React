@@ -11,7 +11,7 @@ function FaQ() {
 
   const faqItems: FAQItem[] = [
     {
-      title: "Is AlienUI a component library?",
+      title: "Is AlienUI React a component library?",
       content:
         "Yes, It is a self-hosted component library but you do not install it as a dependency. It is not available via npm like other traditional component library. Pick the components you need. " +
         "Copy and paste the code into your project and customize to your needs. The code is yours.",
@@ -27,33 +27,22 @@ function FaQ() {
     },
     {
       title: "Which frameworks are supported?",
-      content:
-        "You can use any framework that supports React Native. Expo etc.",
+      content: "React and Next js are supported",
     },
     {
       title: "Can I use this in my project?",
       content:
-        "Yes, you can use AlienUI components in your React Native project. The code is yours. But hey, let us know if you do. We'd love to see what you build.",
+        "Yes, you can use AlienUI React components in your React  project. The code is yours. But hey, let us know if you do. We'd love to see what you build.",
     },
     {
-      title: "How can I support AlienUI?",
+      title: "How can I support AlienUI React?",
       content:
-        "You can support AlienUI by starring the project on GitHub and/or sharing it on Twitter and LinkedIn. It helps increase the project's visibility.",
+        "You can support AlienUI React by starring the project on GitHub and/or sharing it on Twitter and LinkedIn. It helps increase the project's visibility.",
     },
     {
       title: "How do I contribute?",
       content:
         "You can contribute by adding new components, fixing bugs, or improving the documentation. Please create an issue before starting any work.",
-    },
-    {
-      title: "How do I get updates?",
-      content:
-        "The best way to get updates is by following the project on GitHub and all social media platforms like Twitter, LinkedIn etc. You can also get latest updates by subscribing to our newsletter.",
-    },
-    {
-      title: "Can I request new features for AlienUI?",
-      content:
-        "Yes, you can create a new issue on GitHub to request new features. While not every request will be implemented, they all will be considered.",
     },
   ];
 

@@ -13,7 +13,7 @@ function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
             <Link href="/">
-              <h2 className="text-3xl font-semibold">Aui</h2>
+              <h2 className="text-3xl font-semibold">AuiR</h2>
             </Link>
           </div>
 
@@ -27,7 +27,7 @@ function Header() {
             <Link href="https://github.com/khaymanii/alienui">
               <FaGithub className="lg:text-2xl text-xl" />
             </Link>
-            <span className="font-medium text-base">160⭐</span>
+            <span className="font-medium text-base"></span>
           </div>
 
           {/* Hamburger Menu (optional, if you want to toggle mobile menu later) */}

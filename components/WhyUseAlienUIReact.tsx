@@ -4,16 +4,16 @@ import { FcDataConfiguration } from "react-icons/fc";
 import { BiCustomize } from "react-icons/bi";
 import { MdJoinInner } from "react-icons/md";
 
-function WhyUseAlienUI() {
+function WhyUseAlienUIReact() {
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-6 text-center">
         <h1 className="text-3xl font-bold sm:text-4xl text-center mb-2">
-          Why Use AlienUI?
+          Why Use AlienUI React?
         </h1>
         <p className="mt-4 text-lg text-gray-800 mb-8 text-center mx-4">
-          Build stunning mobile apps effortlessly with ready-to-use,
-          customizable components.
+          Build stunning web apps effortlessly with ready-to-use, customizable
+          components.
         </p>
 
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -23,8 +23,8 @@ function WhyUseAlienUI() {
               No npm Installation
             </h3>
             <p className="text-white mt-2">
-              AlienUI requires no NPM installations. Simply copy, paste them
-              into your React Native project seamlessly.
+              AlienUI React requires no NPM installations. Simply copy, paste
+              them into your React project seamlessly.
             </p>
           </div>
 
@@ -32,9 +32,8 @@ function WhyUseAlienUI() {
             <FcDataConfiguration className="w-14 h-14 pb-4 text-white" />
             <h3 className="text-lg font-bold text-white">No Configuration</h3>
             <p className="text-white mt-2">
-              AlienUI works out of the box with zero configuration as it uses
-              in-built native tags, so you can focus on building your app
-              instantly.{" "}
+              AlienUI React works with zero configuration as it uses in-built
+              native tags, so you can focus on building your app instantly.{" "}
             </p>
           </div>
 
@@ -42,8 +41,8 @@ function WhyUseAlienUI() {
             <BiCustomize className="w-14 h-14 pb-4 text-white" />
             <h3 className="text-lg font-bold text-white">Easy Customization</h3>
             <p className="text-white mt-2">
-              Easily customize components with NativeWind&apos;s class utilities
-              to match your app&apos;s design.
+              Easily customize components with Tailwind CSS class utilities to
+              match your web app&apos;s design.
             </p>
           </div>
 
@@ -53,7 +52,7 @@ function WhyUseAlienUI() {
               Open-Source Contributions
             </h3>
             <p className="text-white mt-2">
-              AlienUI is open-source, inviting developers and designers to
+              AlienUI React is open-source, inviting developers and designers to
               collaborate and share UI components.
             </p>
           </div>
@@ -63,4 +62,4 @@ function WhyUseAlienUI() {
   );
 }
 
-export default WhyUseAlienUI;
+export default WhyUseAlienUIReact;

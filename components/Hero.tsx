@@ -7,14 +7,14 @@ function Hero() {
       <div className="max-w-7xl mx-auto px-4 py-20 md:py-24 lg:py-28 flex flex-col items-center md:justify-between">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-white sm:text-5xl mb-2">
-            AlienUI
+            AlienUI React
           </h1>
           <p className="text-white lg:text-xl text-lg text-center font-semibold">
-            Free open-source UI component library for React Native
+            Free open-source UI component library for React
           </p>
           <p className="mt-4 lg:text-lg text-base text-white text-center font-medium lg:w-[1000px]">
-            A lightweight open-source UI component library built on NativeWind
-            for React Native apps. It leverages native tags for seamless
+            A lightweight open-source UI component library built on Tailwind CSS
+            for React web apps. It leverages native tags for seamless
             integration and maintains zero to minimal dependencies, enabling
             high-performance, and stunning interfaces with ease.
           </p>
@@ -32,7 +32,7 @@ function Hero() {
                 Get Started
               </button>
             </Link>
-            <Link href="https://github.com/khaymanii/AlienUI" prefetch>
+            <Link href="https://github.com/AlienUI-Org/AlienUI-React" prefetch>
               <button className="px-4 py-3 bg-purple-800 text-white font-medium rounded-lg shadow-md cursor-pointer">
                 Start Contributing
               </button>

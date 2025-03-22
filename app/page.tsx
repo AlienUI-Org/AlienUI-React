@@ -1,5 +1,5 @@
 import Hero from "@/components/Hero";
-import WhyUseAlienUI from "@/components/WhyUseAlienUI";
+import WhyUseAlienUIReact from "@/components/WhyUseAlienUIReact";
 //import NewsLetter from "@/components/NewsLetter";
 import FaQ from "@/components/FaQ";
 import Inspiration from "@/components/Inspiration";
@@ -12,7 +12,7 @@ export default function Home() {
     <section>
       <InstallVSExtensionModal />
       <Hero />
-      <WhyUseAlienUI />
+      <WhyUseAlienUIReact />
       <Inspiration />
       <Products />
       <FaQ />
