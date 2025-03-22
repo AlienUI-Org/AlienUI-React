@@ -24,7 +24,7 @@ function Header() {
             <Link href="https://x.com/alienui">
               <FaXTwitter className="lg:text-2xl text-xl" />
             </Link>
-            <Link href="https://github.com/khaymanii/alienui">
+            <Link href="https://github.com/khaymanii/alienui-react">
               <FaGithub className="lg:text-2xl text-xl" />
             </Link>
             <span className="font-medium text-base"></span>
