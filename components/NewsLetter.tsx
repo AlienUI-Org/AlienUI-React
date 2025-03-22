@@ -36,7 +36,7 @@ function NewsLetter() {
     <section className="py-20 bg-black">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <h1 className="text-3xl font-bold text-white sm:text-4xl text-center mb-2">
-          Stay Updated with AlienUI
+          Stay Updated with AlienUI React
         </h1>
         <p className="mt-4 text-lg text-white mb-8 text-center mx-4">
           Subscribe to our newsletter and never miss an update! Get the latest

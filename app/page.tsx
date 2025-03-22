@@ -1,6 +1,6 @@
 import Hero from "@/components/Hero";
 import WhyUseAlienUIReact from "@/components/WhyUseAlienUIReact";
-//import NewsLetter from "@/components/NewsLetter";
+import NewsLetter from "@/components/NewsLetter";
 import FaQ from "@/components/FaQ";
 import Inspiration from "@/components/Inspiration";
 import Contributors from "@/components/Contributors";
@@ -15,6 +15,7 @@ export default function Home() {
       <WhyUseAlienUIReact />
       <Inspiration />
       <Products />
+      <NewsLetter />
       <FaQ />
       <Contributors />
     </section>
