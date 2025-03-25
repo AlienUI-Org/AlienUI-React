@@ -11,7 +11,7 @@ export default function ResponsiveNavbar() {
 
   return (
     <nav className="bg-black text-white sticky top-0 z-10 p-5">
-      <div className="container mx-auto">
+      <div className="">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-xl font-bold">
             AlienX{" "}
