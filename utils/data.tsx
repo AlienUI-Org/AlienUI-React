@@ -536,9 +536,8 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { Pressable, Text } from "react-native";
 
-const Button = ({ type = "default", label = "Galaxy Button", onPress }) => {
+const Button = ({ type = "default", label = "Galaxy Button", onClick }) => {
   const buttonStyles = {
     default: {
       bgColor: "bg-black",
@@ -559,45 +558,43 @@ const Button = ({ type = "default", label = "Galaxy Button", onPress }) => {
       bgColor: "bg-gray-400",
       textColor: "text-gray-200",
       border: "",
+      disabled: true,
     },
   };
 
-  const { bgColor, textColor, border } =
-    buttonStyles[type] || buttonStyles.default;
+  const { bgColor, textColor, border, disabled } = buttonStyles[type] || buttonStyles.default;
 
   return (
-    <Pressable
-      className={\`py-2 px-4 rounded-md flex items-center justify-center w-52 \${bgColor} \${border}\`}
-      onPress={type !== "disabled" ? onPress : null}
-      disabled={type === "disabled"}
+    <button
+      className={\`py-2 px-4 rounded-md flex items-center justify-center w-[200px] \${bgColor} \${border}\`}
+      onClick={!disabled ? onClick : null}
+      disabled={disabled}
     >
-      <Text className={\`text-base \${textColor}\`}>{label}</Text>
-    </Pressable>
+      <span className={\`text-base \${textColor}\`}>{label}</span>
+    </button>
   );
 };
 
 export default Button;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Button from "./components/Button/GalaxyButton";
+import Button from "./components/comp/Button/GalaxyButton";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Button />
       {/*
       <Button type="destructive" label="Delete" />
       <Button type="outline" label="Outline Button" />
       <Button type="disabled" label="Disabled" />
       */}
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.GalaxyButton />,
       },
       {
@@ -607,10 +604,15 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { Pressable, Text } from "react-native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { PiAlienThin } from "react-icons/pi";
 
-const Button = ({ label = "Earth Button", type = "default", icon = "alien-outline", iconColor, onPress }) => {
+const Button = ({ 
+  label = "Earth Button", 
+  type = "default", 
+  icon: Icon = PiAlienThin, 
+  iconColor, 
+  onClick 
+}) => {
   const buttonStyles = {
     default: {
       bgColor: "bg-black",
@@ -635,40 +637,33 @@ const Button = ({ label = "Earth Button", type = "default", icon = "alien-outlin
       textColor: "text-gray-200",
       border: "border border-gray-500",
       iconColor: "gray",
-    },
+      disabled: true,
+    }
   };
 
-  const { bgColor, textColor, border } =
+  const { bgColor, textColor, border, disabled } =
     buttonStyles[type] || buttonStyles.default;
 
   return (
-    <Pressable
-      className={\`py-2 px-4 rounded-md flex flex-row items-center justify-center w-52 \${bgColor} \${border}\`}
-      onPress={type !== "disabled" ? onPress : null}
-      disabled={type === "disabled"}
+    <button
+      className={\`py-2 px-4 rounded-md flex items-center justify-center w-[200px] \${bgColor} \${border}\`}
+      onClick={!disabled ? onClick : null}
+      disabled={disabled}
     >
-      <Text className={\`text-base mr-1 \${textColor}\`}>{label}</Text>
-      {icon && (
-        <MaterialCommunityIcons
-          name={icon}
-          size={20}
-          color={iconColor || buttonStyles[type].iconColor}
-        />
-      )}
-    </Pressable>
+      <span className={\`text-base \${textColor} mr-1\`}>{label}</span>
+      {Icon && <Icon className={\`text-xl \${iconColor || buttonStyles[type].iconColor}\`} />} 
+    </button>
   );
 };
 
 export default Button;
-
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Button from "./components/Button/EarthButton";
+import Button from "./components/comp/Button/EarthButton";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Button />
       {/*
       <Button type="destructive" label="Delete" icon="trash-can-outline" />
@@ -676,13 +671,12 @@ const App = () => {
       <Button type="disabled" label="Disabled" />
       <Button label="Custom Icon" icon="rocket-launch-outline" iconColor="blue" />
       */}
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.EarthButton />,
       },
     ],
@@ -699,51 +693,55 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
 
 const Card = () => {
   return (
-    <View className="bg-white rounded-lg overflow-hidden shadow-lg m-4">
-      <Image
-        source={require("../../assets/images/alien1.avif")}
-        className="w-full h-52"
-        resizeMode="cover"
+    <section className="overflow-hidden rounded-lg shadow w-[320px]">
+      <img
+        alt=""
+        src="/images/alien1.avif"
+        width={100}
+        height={100}
+        className="h-56 w-full object-cover"
       />
-      <View className="p-4">
-        <Text className="text-xs text-gray-500 mb-1">07th July 1997</Text>
-        <TouchableOpacity>
-          <Text className="text-lg font-bold text-gray-900 mb-2">
+
+      <div className="bg-white p-4 sm:p-6">
+        <time dateTime="1997-07-07" className="block text-xs text-gray-500">
+          07th July 1997
+        </time>
+
+        <a href="#">
+          <h3 className="mt-0.5 text-lg text-gray-900">
             Exploring the Unknown: The Alien Encounter Chronicles
-          </Text>
-        </TouchableOpacity>
-        <Text className="text-sm text-gray-500 leading-5">
+          </h3>
+        </a>
+
+        <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
           Deep in the vastness of space lies a story untold—of strange beings,
           otherworldly landscapes, and encounters that defy imagination.
           Discover the mysteries of alien civilizations, their technology, and
           the secrets they carry across galaxies.
-        </Text>
-      </View>
-    </View>
+        </p>
+      </div>
+    </section>
   );
 };
 
 export default Card;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Card from "./components/Card/GalaxyCard";
+import Card from "./components/comp/Card/GalaxyCard";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Card />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.GalaxyCard />,
       },
       {
@@ -752,49 +750,52 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 
 const Card = () => {
   return (
-    <View className="rounded-lg overflow-hidden shadow-lg w-4/5">
-      <ImageBackground
-        source={require("../../assets/images/alien1.avif")}
-        className="w-full"
-        imageStyle={{ resizeMode: "cover" }}
-        style={{ height: 350 }}
-      >
-        <View className="flex-1 bg-black/50 justify-end">
-          <View className="p-3">
-            <Text className="text-xs text-white/90">07th July 1997</Text>
-            <TouchableOpacity>
-              <Text className="mt-1 text-lg font-bold text-white">
-                Exploring the Unknown: The Alien Encounter Chronicles
-              </Text>
-            </TouchableOpacity>
-            <Text className="mt-2 text-sm leading-5 text-white/95">
-              Deep in the vastness of space lies a story untold—of strange
-              beings, otherworldly landscapes, and encounters that defy
-              imagination. Discover the mysteries of alien civilizations, their
-              technology, and the secrets they carry across galaxies.
-            </Text>
-          </View>
-        </View>
-      </ImageBackground>
-    </View>
+    <section className="relative overflow-hidden rounded-lg shadow w-[320px]">
+      <img
+        alt=""
+        src="/images/alien1.avif"
+        width={100}
+        height={100}
+        className="absolute h-full w-full object-cover"
+      />
+
+      <div className="relative pt-32 sm:pt-48 lg:pt-64">
+        <div className="p-4 sm:p-6">
+          <time dateTime="1997-07-07" className="block text-xs text-white/90">
+            07th July 1997
+          </time>
+
+          <a href="#">
+            <h3 className="mt-0.5 text-lg text-white">
+              Exploring the Unknown: The Alien Encounter Chronicles
+            </h3>
+          </a>
+
+          <p className="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
+            Deep in the vastness of space lies a story untold—of strange beings,
+            otherworldly landscapes, and encounters that defy imagination.
+            Discover the mysteries of alien civilizations, their technology, and
+            the secrets they carry across galaxies.
+          </p>
+        </div>
+      </div>
+    </section>
   );
 };
 
 export default Card;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Card from "./components/Card/EarthCard";
+import Card from "./components/comp/Card/EarthCard";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Card />
-    </View>
+    </div>
   );
 };
 
@@ -808,46 +809,38 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MdJoinInner } from "react-icons/md";
 
-function Card() {
+const Card = () => {
   return (
-    <View className="flex flex-col items-center bg-black p-7 shadow-md w-4/5 h-64">
-      <MaterialIcons
-        name="join-inner"
-        size={56}
-        color="#ffffff"
-        className="mb-4"
-      />
-      <Text className="text-lg font-bold text-white text-center">
+    <div className="flex flex-col items-center text-center bg-black p-7 shadow-md w-[300px] h-72">
+      <MdJoinInner className="w-14 h-14 pb-4 text-white" />
+      <h3 className="text-lg font-bold text-white">
         Open-Source Contributions
-      </Text>
-      <Text className="mt-2 text-sm text-white text-center">
+      </h3>
+      <p className="text-white mt-2 text-center">
         Alien UI is open-source, inviting developers to collaborate and share
         components to improve mobile app design.
-      </Text>
-    </View>
+      </p>
+    </div>
   );
-}
+};
 
 export default Card;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Card from "./components/Card/JupiterCard";
+import Card from "./components/comp/Card/JupiterCard";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Card />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.JupiterCard />,
       },
       {
@@ -856,99 +849,37 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text } from "react-native";
-import AntDesign from "@expo/vector-icons/AntDesign"
+import { FaChartBar } from "react-icons/fa";
 
 const Card = () => {
   return (
-      <View className="w-3/5 h-44 bg-black p-6">
-        <View className="flex items-center justify-center w-12 h-12 bg-white rounded-full mb-6">
-          <AntDesign name="barschart" size={24} color="#000000" />
-        </View>
-        <Text className="text-lg text-white font-bold">Bar chart showing energy usage</Text>
-    </View>
+    <div className="w-3/5 h-52 bg-black p-6">
+      <div className="flex items-center justify-center w-12 h-12 bg-white rounded-full mb-6">
+        <FaChartBar className="text-black" size={24} />
+      </div>
+      <p className="text-lg text-white font-bold">
+        Bar chart showing energy usage
+      </p>
+    </div>
   );
 };
 
 export default Card;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Card from "./components/Card/PlutoCard";
+import Card from "./components/comp/Card/PlutoCard";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Card />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.PlutoCard />,
-      },
-      {
-        name: "Mars Card",
-        description: "A small regular card for transaction in mars.",
-        designer: "",
-        developer: "",
-        code: `import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-
-const Card = () => {
-  return (
-    <View className="w-full py-8 rounded-3xl border border-black items-center bg-white">
-      <View className="flex-row items-center justify-between bg-black py-2 px-4 rounded-full mb-4">
-        <Image source={require("../../assets/icon/flag.svg")} className="w-7 h-7" />
-        <Text className="text-white ml-2 text-base">USD</Text>
-        <MaterialIcons name="keyboard-arrow-down" size={28} color="white" />
-      </View>
-      <View className="flex-row items-center mb-2 space-x-2">
-        <Text className="text-base">Account balance</Text>
-        <Image source={require("../../assets/icon/eye.svg")} className="w-6 h-6" />
-      </View>
-      <Text className="text-5xl font-semibold mb-4">
-        $150,000.<Text className="text-4xl text-gray-500">00</Text>
-      </Text>
-      <View className="flex-row items-center mb-4 space-x-2">
-        <Image source={require("../../assets/icon/copy.svg")} className="w-6 h-6" />
-        <Text className="text-base">0771224074</Text>
-      </View>
-      <View className="flex-row justify-center space-x-4">
-        <TouchableOpacity className="flex-row items-center justify-center bg-black rounded-full py-3 w-40">
-          <Text className="text-white text-base font-semibold mr-2">Deposit</Text>
-          <Image source={require("../../assets/icon/import.svg")} className="w-6 h-6" />
-        </TouchableOpacity>
-        <TouchableOpacity className="flex-row items-center justify-center bg-black rounded-full py-3 w-40">
-          <Text className="text-white text-base font-semibold mr-2">Transfer</Text>
-          <Image source={require("../../assets/icon/export.svg")} className="w-6 h-6" />
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
-
-export default Card;
-`,
-        code1: `import React from "react";
-import { View } from "react-native";
-import Card from "./components/Card/MarsCard";
-
-const App = () => {
-  return (
-    <View>
-      <Card />
-    </View>
-  );
-};
-
-export default App;
-`,
-
-        render: <Comp.MarsCard />,
       },
     ],
   },
@@ -963,10 +894,8 @@ export default App;
         description: "A carousel for swiping the galaxy.",
         designer: "",
         developer: "",
-
         code: `import React, { useState } from "react";
-import { View, Text, Pressable } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -982,55 +911,50 @@ const Carousel = () => {
   };
 
   return (
-    <View className="flex-1 justify-center items-center">
-      <View className="w-4/5 h-56 justify-center items-center bg-white border border-gray-300 rounded shadow">
-        <Text className="text-4xl font-bold text-gray-800">
-          {slides[currentIndex]}
-        </Text>
-      </View>
+    <div className="relative w-72 max-w-sm mx-auto flex flex-col items-center">
+      <div className="relative w-full h-48 flex items-center justify-center border shadow text-4xl font-bold rounded">
+        {slides[currentIndex]}
+      </div>
 
-      <View className="flex-row justify-between w-4/5 mt-4">
-        <Pressable
-          onPress={prevSlide}
-          className="w-10 h-10 justify-center items-center bg-white border border-gray-300 rounded-full"
+      <div className="mt-4 flex justify-between w-full">
+        <button
+          onClick={prevSlide}
+          className="flex items-center justify-center w-10 h-10 border rounded-full"
         >
-          <AntDesign name="arrowleft" size={16} color="black" />
-        </Pressable>
-        <Pressable
-          onPress={nextSlide}
-          className="w-10 h-10 justify-center items-center bg-white border border-gray-300 rounded-full"
+          <AiOutlineArrowLeft />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="flex items-center justify-center w-10 h-10 border rounded-full"
         >
-          <AntDesign name="arrowright" size={16} color="black" />
-        </Pressable>
-      </View>
+          <AiOutlineArrowRight />
+        </button>
+      </div>
 
-      <View className="flex-row mt-4 space-x-2">
+      <div className="flex gap-2 mt-4">
         {slides.map((_, index) => (
-          <View
+          <span
             key={index}
-            className={\`w-3 h-3 rounded-full \${
-              index === currentIndex
-                ? "bg-black border-black"
-                : "bg-white border-gray-300"
-            } border\`}
-          />
+            className={\`block w-3 h-3 border rounded-full \${
+              index === currentIndex ? "bg-black" : "bg-white"
+            }\`}
+          ></span>
         ))}
-      </View>
-    </View>
+      </div>
+    </div>
   );
 };
 
 export default Carousel;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Carousel from "./components/Carousel/GalaxyCarousel";
+import Carousel from "./components/comp/Carousel/GalaxyCarousel";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Carousel />
-    </View>
+    </div>
   );
 };
 
@@ -1052,49 +976,83 @@ export default App;
         description: "An intergalactic checkbox for cosmic forms.",
         designer: "",
         developer: "",
-
         code: `import React from "react";
-import { View, Text, Pressable } from "react-native";
 
-const CheckBox = () => {
+const Checkbox = () => {
   return (
-    <View className="p-4">
-      <Text className="sr-only">Checkboxes</Text>
-      <View className="space-y-2">
-        <Pressable className="flex flex-row items-center gap-4 p-2 rounded bg-white">
-          <View className="w-5 h-5 border border-gray-300 rounded bg-white"></View>
-          <Text className="text-base font-medium text-gray-900">John Clapton</Text>
-        </Pressable>
-        <Pressable className="flex flex-row items-center gap-4 p-2 rounded bg-white">
-          <View className="w-5 h-5 border border-gray-300 rounded bg-white"></View>
-          <Text className="text-base font-medium text-gray-900">Peter Mayer</Text>
-        </Pressable>
-        <Pressable className="flex flex-row items-center gap-4 p-2 rounded bg-white">
-          <View className="w-5 h-5 border border-gray-300 rounded bg-white"></View>
-          <Text className="text-base font-medium text-gray-900">Eric King</Text>
-        </Pressable>
-      </View>
-    </View>
+    <div>
+      <fieldset>
+        <legend className="sr-only">Checkboxes</legend>
+
+        <div className="space-y-2">
+          <label
+            htmlFor="Option1"
+            className="flex cursor-pointer items-start gap-4"
+          >
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                className="size-4 rounded border-gray-300"
+                id="Option1"
+              />
+            </div>
+            <div>
+              <strong className="font-medium text-gray-900">John Clapton</strong>
+            </div>
+          </label>
+
+          <label
+            htmlFor="Option2"
+            className="flex cursor-pointer items-start gap-4"
+          >
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                className="size-4 rounded border-gray-300"
+                id="Option2"
+              />
+            </div>
+            <div>
+              <strong className="font-medium text-gray-900">Peter Mayer</strong>
+            </div>
+          </label>
+
+          <label
+            htmlFor="Option3"
+            className="flex cursor-pointer items-start gap-4"
+          >
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                className="size-4 rounded border-gray-300"
+                id="Option3"
+              />
+            </div>
+            <div>
+              <strong className="font-medium text-gray-900">Eric King</strong>
+            </div>
+          </label>
+        </div>
+      </fieldset>
+    </div>
   );
 };
 
-export default CheckBox;
+export default Checkbox;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import CheckBox from "./components/CheckBox/GalaxyCheckBox";
+import CheckBox from "./components/comp/CheckBox/GalaxyCheckBox";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <CheckBox />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.GalaxyCheckbox />,
       },
     ],
@@ -1111,7 +1069,6 @@ export default App;
         designer: "",
         developer: "",
         code: `import React, { useState } from "react";
-import { View, Text, Pressable, FlatList } from "react-native";
 
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -1125,50 +1082,44 @@ const Dropdown = () => {
   };
 
   return (
-    <View className="w-4/5 self-center mt-12">
-      <Text className="text-base text-gray-700 mb-2">Choose an option</Text>
-      <Pressable
-        onPress={() => setIsOpen(!isOpen)}
-        className={\`flex-row justify-between items-center bg-white border border-gray-300 px-4 py-3 \${
-          isOpen ? "rounded-t-lg" : "rounded-lg"
-        }\`}
+    <div className="relative inline-block w-64">
+      <label className="block text-gray-700 mb-2">Choose an option</label>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full bg-white text-gray-700 border border-gray-300 rounded-t-md px-4 py-2 text-left flex items-center justify-between"
       >
-        <Text className="text-base text-gray-700">
-          {selectedOption || "Select an option"}
-        </Text>
-        <Text className="text-base text-gray-700">{isOpen ? "▲" : "▼"}</Text>
-      </Pressable>
+        {selectedOption || "Select an option"}
+        <span className={\`w-5 h-5 transition-transform \${isOpen ? "rotate-180" : ""}\`}>
+          ▼
+        </span>
+      </button>
       {isOpen && (
-        <View className="bg-white border border-gray-300 rounded-b-lg mt-2 max-h-40">
-          <FlatList
-            data={options}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <Pressable
-                onPress={() => handleOptionClick(item)}
-                className="px-4 py-3"
-              >
-                <Text className="text-base text-gray-700">{item}</Text>
-              </Pressable>
-            )}
-          />
-        </View>
+        <ul className="absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded-b-md shadow-lg">
+          {options.map((option, index) => (
+            <li
+              key={index}
+              onClick={() => handleOptionClick(option)}
+              className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+            >
+              {option}
+            </li>
+          ))}
+        </ul>
       )}
-    </View>
+    </div>
   );
 };
 
 export default Dropdown;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Dropdown from "./components/Dropdown/GalaxyDropdown";
+import Dropdown from "./components/comp/Dropdown/GalaxyDropdown";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Dropdown />
-    </View>
+    </div>
   );
 };
 
@@ -1190,34 +1141,33 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { TextInput } from "react-native";
 
 const Input = () => {
   return (
-    <TextInput
-      className="border-1 border-black rounded-md p-2.5 w-[80%]"
-      placeholder="Nebulon Input..."
-    />
+    <div>
+      <input
+        className="border border-gray-600 rounded-md p-2"
+        placeholder="Nebulon Input..."
+      />
+    </div>
   );
 };
 
 export default Input;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Input from "./components/Input/NebulonInput";
+import Input from "./components/comp/Input/NebulonInput";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Input />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.NebulonInput />,
       },
       {
@@ -1226,28 +1176,28 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { TextInput } from "react-native";
 
 const Input = () => {
   return (
-    <TextInput
-      className="border-1 border-b border-b-black p-2.5  w-[80%]"
-      placeholder="Earth Input..."
-    />
+    <div>
+      <input
+        className="border-1 border-b border-b-gray-600 p-2"
+        placeholder="Earth Input..."
+      />
+    </div>
   );
 };
 
 export default Input;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Input from "./components/Input/EarthInput";
+import Input from "./components/comp/Input/EarthInput";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Input />
-    </View>
+    </div>
   );
 };
 
@@ -1261,58 +1211,55 @@ export default App;
         designer: "",
         developer: "",
         code: `import React, { useState } from "react";
-import { View, TextInput } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { GiVortex } from "react-icons/gi";
 
 const Input = () => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <View className="relative w-72">
-      <View
+    <div className="relative w-72">
+      <div
         className={\`
-        absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20
-        rounded-lg opacity-20 \${isFocused ? "scale-105 blur-md" : "scale-100"}
-      \`}
+          absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
+          rounded-lg opacity-20 blur-lg transition-all duration-300
+          \${isFocused ? "scale-105 opacity-30" : "scale-100"}
+        \`}
       />
-
-      <View className="relative flex-row items-center">
-        <TextInput
+      
+      <div className="relative flex items-center">
+        <input
+          type="text"
           placeholder="Enter galactic coordinates..."
-          placeholderTextColor="#9ca3af"
           className={\`
-            flex-1 bg-black/80 text-white px-4 py-3 rounded-lg
-            border border-purple-500/30
-            \${isFocused ? "border-purple-500/50" : ""}
+            w-full bg-black/80 text-white px-4 py-2 rounded-lg
+            border border-purple-500/30 outline-none
+            placeholder-gray-400 transition-all duration-300
+            focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20
           \`}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />
-        <MaterialCommunityIcons
-          name="weather-hurricane"
-          size={20}
-          color={isFocused ? "#c084fc" : "#9ca3af"}
-          style={{
-            position: "absolute",
-            right: 12,
-          }}
+        <GiVortex
+          className={\`
+            absolute right-3 w-5 h-5 transition-all duration-300
+            \${isFocused ? "text-purple-400 rotate-180" : "text-gray-400"}
+          \`}
         />
-      </View>
-    </View>
+      </div>
+    </div>
   );
 };
 
 export default Input;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Input from "./components/Input/VortexInput";
+import Input from "./components/comp/Input/VortexInput";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Input />
-    </View>
+    </div>
   );
 };
 
@@ -1336,68 +1283,62 @@ export default App;
         designer: "",
         developer: "",
         code: `import React, { useState } from "react";
-import { View, Text, Pressable, Modal } from "react-native";
 
-const GalaxyModal = () => {
+const Modal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
   return (
-    <View className="flex-1 items-center justify-center">
-      <Pressable onPress={openModal} className="bg-black py-2 px-4 rounded-md">
-        <Text className="text-white text-base">Open Modal</Text>
-      </Pressable>
-
-      <Modal
-        visible={isOpen}
-        transparent
-        animationType="fade"
-        onRequestClose={closeModal}
+    <div className="flex items-center justify-center">
+      <button
+        onClick={openModal}
+        className="px-4 py-2 text-white bg-black rounded-md"
       >
-        <View className="flex-1 items-center justify-center bg-black/50">
-          <View className="w-11/12 bg-white rounded-md shadow-md p-6">
-            <View className="flex-row items-center justify-between border-b pb-4">
-              <Text className="text-xl font-semibold">Galaxy Modal</Text>
-              <Pressable onPress={closeModal}>
-                <Text className="text-gray-400 text-lg">✖</Text>
-              </Pressable>
-            </View>
+        Open Modal
+      </button>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="relative w-full max-w-md p-6 bg-white rounded-md shadow-lg">
+            <div className="flex items-center justify-between pb-4 border-b">
+              <h2 className="text-xl font-semibold">Galaxy Modal</h2>
+              <button onClick={closeModal} className="text-black">
+                ✖
+              </button>
+            </div>
 
-            <View className="my-4">
-              <Text className="text-gray-600 text-base">
-                This is a default galaxy modal component that highlights key
-                information.
-              </Text>
-            </View>
-
-            <View className="flex-row justify-end border-t pt-4">
-              <Pressable
-                onPress={closeModal}
-                className="bg-black py-2 px-4 rounded-md"
+            <div className="py-4">
+              <p className="text-gray-600">
+                This is a default galaxy modal component that highlights key information.
+              </p>
+            </div>
+            <div className="flex justify-end pt-4 border-t">
+              <button
+                onClick={closeModal}
+                className="px-4 py-2 text-white bg-black rounded-md"
               >
-                <Text className="text-white text-base">Close</Text>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
-    </View>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
-export default GalaxyModal;
+export default Modal;
+
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Modal from "./components/Modal/GalaxyModal";
+import Modal from "./components/comp/Modal/GalaxyModal";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Modal />
-    </View>
+    </div>
   );
 };
 
@@ -1407,8 +1348,140 @@ export default App;
       },
     ],
   },
-  notification: {
+  navbar: {
     id: 13,
+    name: "Navbar",
+    icon: AlienUIIcons.AlienReddit,
+    description: "A customizable navbar with navigation links and buttons.",
+    variants: [
+      {
+        name: "Galaxy Navbar",
+        description: "A default galactic navbar.",
+        designer: "",
+        developer: "",
+        code: `import { useState } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  return (
+    <nav className="bg-black text-white sticky top-0 z-10 p-5">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex justify-between items-center">
+          <a href="/" className="text-xl font-bold">AlienX</a>
+          <div className="md:hidden">
+            <button onClick={toggleMenu} className="focus:outline-none">
+              {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            </button>
+          </div>
+          <ul className="hidden md:flex space-x-6">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div className={\`\${isOpen ? "block" : "hidden"} md:hidden mt-4\`}>
+          <ul className="flex flex-col space-y-4">
+            <li><a href="/home" onClick={toggleMenu}>Home</a></li>
+            <li><a href="/about" onClick={toggleMenu}>About</a></li>
+            <li><a href="/services" onClick={toggleMenu}>Services</a></li>
+            <li><a href="/contact" onClick={toggleMenu}>Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+`,
+        code1: `import React from "react";
+import Navbar from "./components/comp/Navbar/GalaxyNavbar";
+
+const App = () => {
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
+};
+
+export default App;
+`,
+        render: <Comp.GalaxyNavbar />,
+      },
+      {
+        name: "Earth Navbar",
+        description: "A navbar component with buttons.",
+        designer: "",
+        developer: "",
+        code: `import React, { useState } from 'react';
+import { FiMenu, FiX } from 'react-icons/fi';
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  return (
+    <nav className="bg-black text-white sticky top-0 z-10 p-4">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="/" className="text-xl font-bold">AlienX</a>
+        <ul className="hidden md:flex space-x-6 mx-auto">
+          <li><a href="/home">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+        <div className="hidden md:flex space-x-4">
+          <button className="bg-transparent border border-white px-4 py-2 rounded hover:bg-white hover:text-black">Login</button>
+          <button className="bg-white text-black px-4 py-2 rounded hover:bg-gray-300">Sign Up</button>
+        </div>
+        <div className="md:hidden">
+          <button onClick={toggleMenu} className="focus:outline-none">
+            {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </button>
+        </div>
+      </div>
+      <div className={\`\${isOpen ? 'block' : 'hidden'} md:hidden mt-4\`}>
+        <ul className="flex flex-col space-y-4">
+          <li><a href="/home" onClick={toggleMenu}>Home</a></li>
+          <li><a href="/about" onClick={toggleMenu}>About</a></li>
+          <li><a href="/services" onClick={toggleMenu}>Services</a></li>
+          <li><a href="/contact" onClick={toggleMenu}>Contact</a></li>
+          <div className="flex flex-col space-y-2 mt-4">
+            <button className="bg-transparent border border-white px-4 py-2 rounded hover:bg-white hover:text-black">Login</button>
+            <button className="bg-white text-black px-4 py-2 rounded hover:bg-gray-300">Sign Up</button>
+          </div>
+        </ul>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+`,
+        code1: `import React from "react";
+import Navbar from "./components/comp/Navbar/EarthNavbar";
+
+const App = () => {
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
+};
+
+export default App;
+`,
+        render: <Comp.EarthNavbar />,
+      },
+    ],
+  },
+  notification: {
+    id: 14,
     name: "Notification",
     icon: AlienUIIcons.AlienStare,
     description:
@@ -1420,52 +1493,47 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { GiAlienStare } from "react-icons/gi";
 
 const Notification = () => {
   return (
-    <View className="w-80 bg-gradient-to-r from-purple-900 via-indigo-900 to-black p-4 rounded-lg shadow-lg border border-purple-500/20">
-      <View className="flex-row items-start space-x-4">
-        <View className="bg-purple-500/20 p-2 rounded-full">
-          <MaterialCommunityIcons name="alien" size={24} color="#c084fc" />
-        </View>
-        
-        <View className="flex-1">
-          <View className="flex-row items-center justify-between">
-            <Text className="text-purple-300 font-semibold">Alien Signal Detected</Text>
-            <Text className="text-purple-400/60 text-xs">Now</Text>
-          </View>
-          
-          <Text className="mt-1 text-sm text-purple-200/80">
+    <div className="w-80 bg-gradient-to-r from-purple-900 via-indigo-900 to-black p-4 rounded-lg shadow-lg border border-purple-500/20">
+      <div className="flex items-start space-x-4">
+        <div className="flex-shrink-0 bg-purple-500/20 p-2 rounded-full">
+          <GiAlienStare className="w-6 h-6 text-purple-400 animate-pulse" />
+        </div>
+        <div className="flex-1">
+          <div className="flex items-center justify-between">
+            <p className="text-purple-300 font-semibold">Alien Signal Detected</p>
+            <span className="text-purple-400/60 text-xs">Now</span>
+          </div>
+          <p className="mt-1 text-sm text-purple-200/80">
             Unknown transmission received from the Andromeda galaxy. Decoding sequence initiated.
-          </Text>
-          
-          <View className="mt-3 flex-row items-center space-x-3">
-            <TouchableOpacity className="px-3 py-1 bg-purple-500/20 rounded-full">
-              <Text className="text-xs font-medium text-purple-200">Decode Now</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text className="text-xs font-medium text-purple-300/70">Dismiss</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </View>
+          </p>
+          <div className="mt-3 flex items-center space-x-3">
+            <button className="px-3 py-1 text-xs font-medium text-purple-200 bg-purple-500/20 rounded-full hover:bg-purple-500/30 transition-colors">
+              Decode Now
+            </button>
+            <button className="px-3 py-1 text-xs font-medium text-purple-300/70 hover:text-purple-200 transition-colors">
+              Dismiss
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default Notification;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Notification from "./components/Notification/NebulaNotification";
+import Notification from "./components/comp/Notification/NebulaNotification";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Notification />
-    </View>
+    </div>
   );
 };
 
@@ -1476,7 +1544,7 @@ export default App;
     ],
   },
   pagination: {
-    id: 14,
+    id: 15,
     name: "Pagination",
     icon: AlienUIIcons.AlienCrackedAlienSkull,
     description: "A customizable pagination component.",
@@ -1487,51 +1555,77 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const Pagination = () => {
   return (
-    <View className="flex-row gap-2">
-      <TouchableOpacity className="w-8 h-8 justify-center items-center border border-gray-300 rounded bg-white">
-        <AntDesign name="left" size={10} color="black" />
-      </TouchableOpacity>
-      <TouchableOpacity className="w-8 h-8 justify-center items-center border border-gray-300 rounded bg-white">
-        <Text className="text-gray-800 text-sm font-medium">1</Text>
-      </TouchableOpacity>
-      <TouchableOpacity className="w-8 h-8 justify-center items-center border border-black rounded bg-black">
-        <Text className="text-white text-sm font-medium">2</Text>
-      </TouchableOpacity>
-      <TouchableOpacity className="w-8 h-8 justify-center items-center border border-gray-300 rounded bg-white">
-        <Text className="text-gray-800 text-sm font-medium">3</Text>
-      </TouchableOpacity>
-      <TouchableOpacity className="w-8 h-8 justify-center items-center border border-gray-300 rounded bg-white">
-        <Text className="text-gray-800 text-sm font-medium">4</Text>
-      </TouchableOpacity>
-      <TouchableOpacity className="w-8 h-8 justify-center items-center border border-gray-300 rounded bg-white">
-        <AntDesign name="right" size={10} color="black" />
-      </TouchableOpacity>
-    </View>
+    <div>
+      <ol className="flex justify-center gap-1 text-xs font-medium">
+        <li>
+          <a
+            href="#"
+            className="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180"
+          >
+            <span className="sr-only">Prev Page</span>
+            <FiChevronLeft className="size-4" />
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            className="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900"
+          >
+            1
+          </a>
+        </li>
+        <li className="block size-8 rounded border bg-black text-center leading-8 text-white">
+          2
+        </li>
+        <li>
+          <a
+            href="#"
+            className="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900"
+          >
+            3
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            className="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900"
+          >
+            4
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            className="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180"
+          >
+            <span className="sr-only">Next Page</span>
+            <FiChevronRight className="size-4" />
+          </a>
+        </li>
+      </ol>
+    </div>
   );
 };
 
 export default Pagination;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Pagination from "./components/Pagination/GalaxyPagination";
+import Pagination from "./components/comp/Pagination/GalaxyPagination";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Pagination />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.GalaxyPagination />,
       },
       {
@@ -1540,36 +1634,44 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const Pagination = () => {
   return (
-    <View className="flex-row items-center gap-3">
-      <TouchableOpacity className="w-8 h-8 justify-center items-center border border-gray-300 rounded bg-white">
-        <AntDesign name="left" size={10} color="black" />
-      </TouchableOpacity>
-      <Text className="text-xs text-gray-800">
-        1<Text className="mx-0.5"> / </Text>47
-      </Text>
-      <TouchableOpacity className="w-8 h-8 justify-center items-center border border-gray-300 rounded bg-white">
-        <AntDesign name="right" size={10} color="black" />
-      </TouchableOpacity>
-    </View>
+    <div className="inline-flex items-center justify-center gap-3">
+      <a
+        href="#"
+        className="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180"
+      >
+        <span className="sr-only">Prev Page</span>
+        <FiChevronLeft className="size-4" />
+      </a>
+
+      <p className="text-xs text-gray-900">
+        1<span className="mx-0.25">/</span>47
+      </p>
+
+      <a
+        href="#"
+        className="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180"
+      >
+        <span className="sr-only">Next Page</span>
+        <FiChevronRight className="size-4" />
+      </a>
+    </div>
   );
 };
 
 export default Pagination;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Pagination from "./components/Pagination/MarsPagination";
+import Pagination from "./components/comp/Pagination/MarsPagination";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Pagination />
-    </View>
+    </div>
   );
 };
 
@@ -1580,7 +1682,7 @@ export default App;
     ],
   },
   popover: {
-    id: 15,
+    id: 16,
     name: "Popover",
     icon: AlienUIIcons.AlienPiAlienBold,
     description: "A customizable popover component.",
@@ -1590,70 +1692,77 @@ export default App;
         description: "A default popover that displays rich content in a page.",
         designer: "",
         developer: "",
-        code: `import React, { useState } from "react";
-import { View, Text, Pressable, TouchableWithoutFeedback } from "react-native";
+        code: `import React, { useState, useRef, useEffect } from "react";
 
 const Popover = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const togglePopover = () => {
-    setIsOpen((prev) => !prev);
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      popoverRef.current &&
+      !popoverRef.current.contains(event.target as Node) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
   };
 
-  const closePopover = () => {
-    setIsOpen(false);
-  };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <TouchableWithoutFeedback onPress={closePopover}>
-      <View className="flex-1 justify-center items-center">
-        <Pressable
-          className="bg-black px-4 py-2 rounded"
-          onPress={togglePopover}
-        >
-          <Text className="text-white text-base">Toggle Popover</Text>
-        </Pressable>
+    <div className="relative flex justify-center items-center">
+      <button
+        ref={buttonRef}
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="px-4 py-2 text-white bg-black rounded"
+      >
+        Toggle Popover
+      </button>
 
-        {isOpen && (
-          <TouchableWithoutFeedback>
-            <View className="absolute w-[100%] bottom-full mb-2 z-10 justify-center items-center">
-              <View className="h-auto bg-white p-4 rounded shadow">
-                <Text className="text-base">This is a Galaxy Popover</Text>
-                <Text className="text-gray-500 mt-2 text-sm">
-                  You can put any content here.
-                </Text>
-              </View>
-            </View>
-          </TouchableWithoutFeedback>
-        )}
-      </View>
-    </TouchableWithoutFeedback>
+      {isOpen && (
+        <div
+          ref={popoverRef}
+          className="absolute z-10 bottom-full mb-2 w-60 h-auto p-4 bg-white border rounded shadow"
+        >
+          <p>This is a Galaxy Popover</p>
+          <p className="mt-2 text-sm text-gray-500">
+            You can put any content here.
+          </p>
+        </div>
+      )}
+    </div>
   );
 };
 
 export default Popover;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Popover from "./components/Popover/GalaxyPopover";
+import Popover from "./components/comp/Popover/GalaxyPopover";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Popover />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.GalaxyPopover />,
       },
     ],
   },
   progressbar: {
-    id: 16,
+    id: 17,
     name: "Progress",
     icon: AlienUIIcons.AlienTbAlien,
     description:
@@ -1665,47 +1774,94 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View } from "react-native";
-import { FontAwesome, MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 
 const ProgressBar = () => {
   return (
-    <View>
-      <View className="h-2 w-[90%]  bg-gray-300 rounded-lg overflow-hidden">
-        <View className="h-full w-1/2 bg-black" />
-      </View>
-      <View className="flex-row justify-between mt-4">
-        <View className="flex-1 items-center">
-          <FontAwesome name="info-circle" size={24} color="black" />
-        </View>
-        <View className="flex-1 items-center">
-          <MaterialCommunityIcons name="map-marker" size={24} color="black" />
-        </View>
-        <View className="flex-1 items-center">
-          <AntDesign name="creditcard" size={24} color="#A1A1AA" />
-        </View>
-      </View>
-    </View>
+    <div>
+      <h2 className="sr-only">Steps</h2>
+
+      <div className="w-[400px]">
+        <div className="overflow-hidden w-full rounded-full bg-gray-200">
+          <div className="h-2 w-1/2 rounded-full bg-black"></div>
+        </div>
+
+        <ol className="mt-4 grid grid-cols-3 text-sm font-medium text-gray-500">
+          <li className="flex items-center justify-start text-black sm:gap-1.5">
+            <svg
+              className="size-6 sm:size-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
+              />
+            </svg>
+          </li>
+
+          <li className="flex items-center justify-center text-black sm:gap-1.5">
+            <svg
+              className="size-6 sm:size-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+          </li>
+
+          <li className="flex items-center justify-end sm:gap-1.5">
+            <svg
+              className="size-6 sm:size-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+              />
+            </svg>
+          </li>
+        </ol>
+      </div>
+    </div>
   );
 };
 
 export default ProgressBar;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import ProgressBar from "./components/ProgressBar/GalaxyProgressBar";
+import ProgressBar from "./components/comp/ProgressBar/GalaxyProgressBar";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <ProgressBar />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.GalaxyProgressBar />,
       },
       {
@@ -1714,29 +1870,25 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View } from "react-native";
 
 const ProgressBar = () => {
   return (
-    <View>
-        <View className="mt-4 h-2 w-[90%]  rounded-full bg-gray-200 overflow-hidden">
-          <View className="h-full w-2/3 rounded-full bg-black"></View>
-        </View>
-    </View>
+    <div className="w-[400px] mt-4 h-2 overflow-hidden rounded-full bg-gray-200">
+      <div className="h-full w-2/3 rounded-full bg-black"></div>
+    </div>
   );
 };
 
 export default ProgressBar;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import ProgressBar from "./components/ProgressBar/EarthProgressBar";
+import ProgressBar from "./components/comp/ProgressBar/EarthProgressBar";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <ProgressBar />
-    </View>
+    </div>
   );
 };
 
@@ -1750,49 +1902,49 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { FaCheckCircle } from "react-icons/fa";
 
 const ProgressBar = () => {
   return (
-    <View className="my-5">
-      <View className="relative w-[90%]  mt-4 h-1.5 bg-gray-200 rounded-lg">
-        <View className="absolute inset-0 flex flex-row justify-between -top-4">
-          <View className="flex-1 items-start">
-            <View className="w-9 h-9 p-2 rounded-full bg-black justify-center items-center mb-2">
-              <FontAwesome name="check-circle" size={20} color="white" />
-            </View>
-            <Text className="text-xs font-medium text-black">Details</Text>
-          </View>
-          <View className="flex-1 items-center">
-            <View className="w-9 h-9 p-2 rounded-full bg-black justify-center items-center mb-2">
-              <FontAwesome name="check-circle" size={20} color="white" />
-            </View>
-            <Text className="text-xs font-medium text-black">Address</Text>
-          </View>
-          <View className="flex-1 items-end">
-            <View className="w-9 h-9 p-2 rounded-full bg-gray-400 justify-center items-center mb-2">
-              <FontAwesome name="check-circle" size={20} color="white" />
-            </View>
-            <Text className="text-xs font-medium text-gray-500">Payment</Text>
-          </View>
-        </View>
-      </View>
-    </View>
+    <div className="my-5 px-4">
+      <div className="relative w-[400px] mt-4 h-1.5 bg-gray-200 rounded-lg">
+        <div className="absolute inset-0 flex justify-between -top-4">
+          <div className="flex flex-col items-start flex-1">
+            <div className="w-9 h-9 p-2 rounded-full bg-black flex justify-center items-center mb-2">
+              <FaCheckCircle size={20} className="text-white" />
+            </div>
+            <span className="text-xs font-medium text-black">Details</span>
+          </div>
+
+          <div className="flex flex-col items-center flex-1">
+            <div className="w-9 h-9 p-2 rounded-full bg-black flex justify-center items-center mb-2">
+              <FaCheckCircle size={20} className="text-white" />
+            </div>
+            <span className="text-xs font-medium text-black">Address</span>
+          </div>
+
+          <div className="flex flex-col items-end flex-1">
+            <div className="w-9 h-9 p-2 rounded-full bg-gray-400 flex justify-center items-center mb-2">
+              <FaCheckCircle size={20} className="text-white" />
+            </div>
+            <span className="text-xs font-medium text-gray-500">Payment</span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default ProgressBar;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import ProgressBar from "./components/ProgressBar/MarsProgressBar";
+import ProgressBar from "./components/comp/ProgressBar/MarsProgressBar";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <ProgressBar />
-    </View>
+    </div>
   );
 };
 
@@ -1803,7 +1955,7 @@ export default App;
     ],
   },
   searchbar: {
-    id: 17,
+    id: 18,
     name: "Search",
     icon: AlienUIIcons.AlienStare,
     description: "A customizable search bar.",
@@ -1813,36 +1965,31 @@ export default App;
         description: "A default search bar for searching the galaxy.",
         designer: "",
         developer: "",
-        code: `import { View, TextInput } from "react-native";
-import React from "react";
-import EvilIcons from "@expo/vector-icons/EvilIcons";
+        code: `import React from "react";
+import { GoSearch } from "react-icons/go";
 
 const SearchBar = () => {
   return (
-    <View className="mx-4 my-3">
-      <View className="flex-row items-center bg-gray-100 rounded-full px-4 py-3">
-        <EvilIcons name="search" size={24} color="gray" />
-        <TextInput
-          placeholder="Search the galaxy..."
-          className="flex-1 ml-2 text-base outline-none"
-          placeholderTextColor="gray"
-        />
-      </View>
-    </View>
+    <div className="w-[400px] flex items-center bg-gray-100 rounded-full px-4 py-3">
+      <GoSearch size={20} color="gray" />
+      <input
+        placeholder="Search the galaxy..."
+        className="flex-1 ml-2 text-base border-none outline-none bg-transparent"
+      />
+    </div>
   );
 };
 
 export default SearchBar;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import SearchBar from "./components/SearchBar/GalaxySearchBar";
+import SearchBar from "./components/comp/SearchBar/GalaxySearchBar";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <SearchBar />
-    </View>
+    </div>
   );
 };
 
@@ -1853,7 +2000,7 @@ export default App;
     ],
   },
   spinner: {
-    id: 18,
+    id: 19,
     name: "Spinner",
     icon: AlienUIIcons.AlienLiaRedditAlien,
     description:
@@ -1865,27 +2012,25 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View } from "react-native";
 
 const Spinner = () => {
   return (
-    <View className="flex items-center justify-center">
-      <View className="h-12 w-12 border-4 border-black border-t-transparent rounded-full animate-spin" />
-    </View>
+    <div className="flex items-center justify-center">
+      <div className="h-12 w-12 border-4 border-black border-t-transparent border-solid rounded-full animate-spin"></div>
+    </div>
   );
 };
 
 export default Spinner;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Spinner from "./components/Spinner/GalaxySpinner";
+import Spinner from "./components/comp/Spinner/GalaxySpinner";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Spinner />
-    </View>
+    </div>
   );
 };
 
@@ -1900,7 +2045,6 @@ export default App;
         designer: "",
         developer: "",
         code: `import React, { useState, useEffect } from "react";
-import { View } from "react-native";
 
 const Spinner = () => {
   const [currentColor, setCurrentColor] = useState("bg-black");
@@ -1911,7 +2055,7 @@ const Spinner = () => {
       "bg-red-500",
       "bg-blue-500",
       "bg-green-500",
-      "bg-yellow-500",
+      "bg-yellow-500"
     ];
     let index = 0;
 
@@ -1924,23 +2068,22 @@ const Spinner = () => {
   }, []);
 
   return (
-    <View className="flex items-center justify-center">
-      <View className={\`w-12 h-12 \${currentColor} rounded-full animate-spin\`} />
-    </View>
+    <div className="flex items-center justify-center">
+      <div className={\`w-12 h-12 \${currentColor} rounded-full animate-spin\`} />
+    </div>
   );
 };
 
 export default Spinner;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Spinner from "./components/Spinner/EarthSpinner";
+import Spinner from "./components/comp/Spinner/EarthSpinner";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Spinner />
-    </View>
+    </div>
   );
 };
 
@@ -1951,7 +2094,7 @@ export default App;
     ],
   },
   switch: {
-    id: 19,
+    id: 20,
     name: "Switch",
     icon: AlienUIIcons.AlienPiAlienThin,
     description: "A customizable switch for enabling and disabling options.",
@@ -1962,38 +2105,36 @@ export default App;
         designer: "",
         developer: "",
         code: `import React, { useState } from "react";
-import { Pressable, View } from "react-native";
 
 const Switch = () => {
   const [isEnabled, setIsEnabled] = useState(false);
 
   return (
-    <Pressable
-      onPress={() => setIsEnabled(!isEnabled)}
-      className={\`relative flex h-7 w-14 items-center justify-center rounded-full p-1 transition \${
+    <div
+      className={\`relative inline-flex h-7 w-14 items-center rounded-full cursor-pointer transition \${
         isEnabled ? "bg-black" : "bg-gray-400"
       }\`}
+      onClick={() => setIsEnabled(!isEnabled)}
     >
-      <View
-        className={\`h-6 w-6 transform rounded-full bg-white transition \${
-          isEnabled ? "translate-x-3" : "translate-x-0"
+      <span
+        className={\`inline-block h-6 w-6 transform rounded-full bg-white transition \${
+          isEnabled ? "translate-x-6" : "translate-x-1"
         }\`}
       />
-    </Pressable>
+    </div>
   );
 };
 
 export default Switch;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Switch from "./components/Switch/GalaxySwitch";
+import Switch from "./components/comp/Switch/GalaxySwitch";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Switch />
-    </View>
+    </div>
   );
 };
 
@@ -2004,7 +2145,7 @@ export default App;
     ],
   },
   table: {
-    id: 20,
+    id: 21,
     name: "Table",
     icon: AlienUIIcons.AlienBug,
     description: "A customizable table component for data storage",
@@ -2015,75 +2156,55 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text, FlatList, ScrollView } from "react-native";
 
 const Table = () => {
   const tableData = [
     { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
     { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Editor" },
-    { id: 3, name: "Sam Wilson", email: "sam@example.com", role: "Viewer" },
+    { id: 3, name: "Sam Wilson", email: "sam@example.com", role: "Viewer" }
   ];
 
   return (
-    <View className="flex-1 bg-white p-4">
-      <ScrollView horizontal>
-        <View className="min-w-[600px] border-collapse">
-          <View className="flex-row bg-gray-100">
-            <Text className="flex-[0.5] font-bold text-base text-left px-4 py-2">
-              ID
-            </Text>
-            <Text className="flex-1 font-bold text-base text-left px-4 py-2">
-              Name
-            </Text>
-            <Text className="flex-1 font-bold text-base text-left px-4 py-2">
-              Email
-            </Text>
-            <Text className="flex-1 font-bold text-base text-left px-4 py-2">
-              Role
-            </Text>
-          </View>
-
-          <FlatList
-            data={tableData}
-            renderItem={({ item, index }) => (
-              <View
-                className={\`flex-row \${
-                  index % 2 === 0 ? "bg-white" : "bg-gray-100"
-                }\`}
+    <div className="container mx-auto p-4">
+      <div className="overflow-x-auto">
+        <table className="min-w-full border-collapse text-sm">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="px-4 py-2 text-left">ID</th>
+              <th className="px-4 py-2 text-left">Name</th>
+              <th className="px-4 py-2 text-left">Email</th>
+              <th className="px-4 py-2 text-left">Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableData.map((row) => (
+              <tr
+                key={row.id}
+                className="odd:bg-white even:bg-gray-50 text-nowrap"
               >
-                <Text className="flex-[0.5] text-base text-left px-4 py-2">
-                  {item.id}
-                </Text>
-                <Text className="flex-1 text-base text-left px-4 py-2">
-                  {item.name}
-                </Text>
-                <Text className="flex-1 text-base text-left px-4 py-2">
-                  {item.email}
-                </Text>
-                <Text className="flex-1 text-base text-left px-4 py-2">
-                  {item.role}
-                </Text>
-              </View>
-            )}
-            keyExtractor={(item) => item.id.toString()}
-          />
-        </View>
-      </ScrollView>
-    </View>
+                <td className="px-4 py-2">{row.id}</td>
+                <td className="px-4 py-2">{row.name}</td>
+                <td className="px-4 py-2">{row.email}</td>
+                <td className="px-4 py-2">{row.role}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 
 export default Table;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Table from "./components/Table/GalaxyTable";
+import Table from "./components/comp/Table/GalaxyTable";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Table />
-    </View>
+    </div>
   );
 };
 
@@ -2094,7 +2215,7 @@ export default App;
     ],
   },
   toast: {
-    id: 21,
+    id: 22,
     name: "Toast",
     icon: AlienUIIcons.AlienPiAlienLight,
     description:
@@ -2106,60 +2227,55 @@ export default App;
           "A default toast component that shows different props: success, failure and warning, by changing the color and text to suit your use case.",
         designer: "",
         developer: "",
-        code: `import { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+        code: `import React, { useState, useEffect } from "react";
 
-const Toast = () => {
-  const [visible, setVisible] = useState(false);
-
-  const showToast = () => {
-    setVisible(true);
-    setTimeout(() => {
-      setVisible(false);
-    }, 2000);
-  };
-
-  const onClose = () => {
-    setVisible(false);
-  };
+const SuccessToast = ({ onClose }) => {
+  useEffect(() => {
+    const timer = setTimeout(onClose, 3000);
+    return () => clearTimeout(timer);
+  }, [onClose]);
 
   return (
-    <View className="flex-1 items-center justify-center">
-      <TouchableOpacity
-        onPress={showToast}
-        className="px-4 py-2 bg-black rounded-lg"
+    <div className="fixed top-5 right-5 z-50 px-4 py-2 bg-green-500 rounded shadow-lg flex items-center justify-between text-white">
+      <p className="text-sm">Operation successful!</p>
+      <button onClick={onClose} className="ml-4 font-bold">
+        ×
+      </button>
+    </div>
+  );
+};
+
+const Toast = () => {
+  const [showToast, setShowToast] = useState(false);
+
+  return (
+    <div className="flex items-center justify-center">
+      <button
+        onClick={() => setShowToast(true)}
+        className="px-4 py-2 bg-black text-white rounded"
       >
-        <Text className="text-white font-semibold">Click me</Text>
-      </TouchableOpacity>
-      {visible && (
-        <View className="absolute bottom-40 w-[80%] px-4 py-2 bg-green-500 rounded-lg transition-opacity duration-300 opacity-100 flex-row justify-between items-center">
-          <Text className="text-white">Operation successful</Text>
-          <TouchableOpacity onPress={onClose} className="ml-2 px-2">
-            <Text className="text-white text-lg font-bold">×</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-    </View>
+        Click me
+      </button>
+      {showToast && <SuccessToast onClose={() => setShowToast(false)} />}
+    </div>
   );
 };
 
 export default Toast;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Toast from "./components/Toast/GalaxyToast";
+import Toast from "./components/comp/Toast/GalaxyToast";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Toast />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.GalaxyToast />,
       },
       {
@@ -2168,63 +2284,58 @@ export default App;
           "A toast component that shows different props: success, failure and warning, by changing the color and text to suit your use case.",
         designer: "",
         developer: "",
-        code: `import { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+        code: `import React, { useState, useEffect } from "react";
 
-const Toast = () => {
-  const [visible, setVisible] = useState(false);
-
-  const showToast = () => {
-    setVisible(true);
-    setTimeout(() => {
-      setVisible(false);
-    }, 2000);
-  };
-
-  const onClose = () => {
-    setVisible(false);
-  };
+const SuccessToast = ({ onClose }) => {
+  useEffect(() => {
+    const timer = setTimeout(onClose, 3000);
+    return () => clearTimeout(timer);
+  }, [onClose]);
 
   return (
-    <View className="flex-1 items-center justify-center">
-      <TouchableOpacity
-        onPress={showToast}
-        className="px-4 py-2 bg-black rounded-lg"
+    <div className="fixed top-5 right-5 z-50 px-4 py-2 self-center flex justify-between items-center bg-green-50 border-b-4 border-green-500 shadow-lg">
+      <div>
+        <p className="text-sm mb-1">Operation successful!</p>
+        <p className="text-sm">Moving to the next planet</p>
+      </div>
+      <button onClick={onClose} className="ml-4 font-bold">
+        ×
+      </button>
+    </div>
+  );
+};
+
+const Toast = () => {
+  const [showToast, setShowToast] = useState(false);
+
+  return (
+    <div className="flex items-center justify-center">
+      <button
+        onClick={() => setShowToast(true)}
+        className="px-4 py-2 bg-black text-white rounded"
       >
-        <Text className="text-white font-semibold">Click me</Text>
-      </TouchableOpacity>
-      {visible && (
-        <View className="absolute bottom-40 w-[80%] bg-green-50 border-b-4 border-green-500 px-4 py-3  rounded-lg transition-opacity duration-300 opacity-100 flex-row justify-between items-center">
-          <View>
-            <Text className="text-sm mb-1">Operation successful!</Text>
-            <Text className="text-sm">Moving to the next planet</Text>
-          </View>
-          <TouchableOpacity onPress={onClose} className="ml-2 px-2">
-            <Text className="text-xl font-bold">×</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-    </View>
+        Click me
+      </button>
+      {showToast && <SuccessToast onClose={() => setShowToast(false)} />}
+    </div>
   );
 };
 
 export default Toast;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Toast from "./components/Toast/EarthToast";
+import Toast from "./components/comp/Toast/EarthToast";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Toast />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.EarthToast />,
       },
     ],

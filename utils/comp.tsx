@@ -17,7 +17,6 @@ import GalaxyProgressBar from "@/components/comp/Progress Bar/GalaxyProgressBar"
 import GalaxyCard from "@/components/comp/Card/GalaxyCard";
 import EarthCard from "@/components/comp/Card/EarthCard";
 import JupiterCard from "@/components/comp/Card/JupiterCard";
-import MarsCard from "@/components/comp/Card/MarsCard";
 import PlutoCard from "@/components/comp/Card/PlutoCard";
 import EarthProgressBar from "@/components/comp/Progress Bar/EarthProgressBar";
 import MarsProgressBar from "@/components/comp/Progress Bar/MarsProgressBar";
@@ -34,6 +33,8 @@ import GalaxyTable from "@/components/comp/Table/GalaxyTable";
 import GalaxySearchBar from "@/components/comp/Search Bar/GalaxySearchBar";
 import NebulaNotification from "@/components/comp/Notification/NebulaNotification";
 import VortexInput from "@/components/comp/Input/VortexInput";
+import GalaxyNavbar from "@/components/comp/Navbar/GalaxyNavbar";
+import EarthNavbar from "@/components/comp/Navbar/EarthNavbar";
 
 export const Comp = {
   EarthButton,
@@ -57,7 +58,6 @@ export const Comp = {
   GalaxyCard,
   EarthCard,
   JupiterCard,
-  MarsCard,
   PlutoCard,
   GalaxyToast,
   EarthToast,
@@ -72,4 +72,6 @@ export const Comp = {
   GalaxySearchBar,
   NebulaNotification,
   VortexInput,
+  GalaxyNavbar,
+  EarthNavbar,
 };
