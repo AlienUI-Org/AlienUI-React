@@ -37,14 +37,13 @@ export const components: Components = {
         designer: "",
         developer: "",
         code: `import React, { useState } from "react";
-import { View, Text, Pressable, ScrollView } from "react-native";
 
 const Accordion = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const accordionItems = [
     {
-      title: "Is AlienUI a component library?",
+      title: "Is AlienUI React a component library?",
       content:
         "Yes, It is a self-hosted component library but you do not install it as a dependency. It is not available via npm like other traditional component library. Pick the components you need. " +
         "Copy and paste the code into your project and customize to your needs. The code is yours.",
@@ -60,13 +59,12 @@ const Accordion = () => {
     },
     {
       title: "Which frameworks are supported?",
-      content:
-        "You can use any framework that supports React Native. Expo etc.",
+      content: "React and Next Js.",
     },
     {
       title: "Can I use this in my project?",
       content:
-        "Yes, you can use AlienUI in your React Native project. The code is yours. But hey, let us know if you do. We'd love to see what you build.",
+        "Yes, you can use AlienUI React in your React Native project. The code is yours. But hey, let us know if you do. We'd love to see what you build.",
     },
   ];
 
@@ -75,48 +73,43 @@ const Accordion = () => {
   };
 
   return (
-    <ScrollView className="flex-1">
-      <View className="w-11/12 border">
+    <section className="w-full lg:w-[450px] flex flex-col items-center justify-center px-4 my-16">
+      <div className="w-full max-w-7xl mx-auto border bg-white">
         {accordionItems.map((item, index) => (
-          <View key={index} className="border-b last:border-b-0 border-gray-300">
-            <Pressable
-              onPress={() => toggleAccordion(index)}
-              className={\`flex flex-row justify-between items-center px-5 py-4 bg-white \${openIndex === index ? "bg-white" : ""}\`}
+          <div key={index} className="border-b last:border-b-0 border-gray-300">
+            <button
+              onClick={() => toggleAccordion(index)}
+              className="w-full text-left py-4 px-6 flex justify-between items-center"
             >
-              <Text className="text-base text-gray-800">
-                {item.title}
-              </Text>
-              <Text
-                className={\`text-base transition-transform duration-300 \${
-                  openIndex === index ? "rotate-180" : ""
-                }\`}
+              <span className="text-lg font-medium">{item.title}</span>
+              <span
+                className={\`transform transition-transform \${openIndex === index ? "rotate-180" : ""}\`}
               >
                 ▼
-              </Text>
-            </Pressable>
+              </span>
+            </button>
             {openIndex === index && (
-              <View className="px-5 py-4">
-                <Text className="text-sm text-gray-600">{item.content}</Text>
-              </View>
+              <div className="px-6 py-4">
+                <p className="text-gray-700">{item.content}</p>
+              </div>
             )}
-          </View>
+          </div>
         ))}
-      </View>
-    </ScrollView>
+      </div>
+    </section>
   );
-}
+};
 
 export default Accordion;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Accordion from "./components/Accordion/GalaxyAccordion";
+import Accordion from "./components/comp/Accordion/GalaxyAccordion";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Accordion />
-    </View>
+    </div>
   );
 };
 
@@ -140,63 +133,60 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle } from "react-icons/fa";
 
-const Alert = ({ type, title, message }) => {
+const Alert = ({ type = "success", title, message }) => {
   const alertStyles = {
     success: {
       bgColor: "bg-green-50",
       borderColor: "border-green-400",
-      icon: "check-circle",
-      iconColor: "#16a34a",
+      icon: <FaCheckCircle className="text-green-600 w-5 h-5" />,
+      textColor: "text-gray-900"
     },
     warning: {
       bgColor: "bg-yellow-50",
       borderColor: "border-yellow-400",
-      icon: "alert-triangle",
-      iconColor: "#ca8a04",
+      icon: <FaExclamationTriangle className="text-yellow-600 w-5 h-5" />,
+      textColor: "text-gray-900"
     },
     failure: {
       bgColor: "bg-red-50",
       borderColor: "border-red-400",
-      icon: "x-circle",
-      iconColor: "#dc2626",
-    },
+      icon: <FaTimesCircle className="text-red-600 w-5 h-5" />,
+      textColor: "text-gray-900"
+    }
   };
 
-  const { bgColor, borderColor, icon, iconColor } =
-    alertStyles[type] || alertStyles.success;
+  const { bgColor, borderColor, icon, textColor } = alertStyles[type] || alertStyles.success;
 
   return (
-    <View className={\`rounded-xl border \${borderColor} \${bgColor} p-4 w-64\`}>
-      <View className="flex flex-row items-start gap-4">
-        <Feather name={icon} size={24} color={iconColor} />
-        <View className="flex-1">
-          <Text className="text-lg font-medium text-gray-900">{title}</Text>
-          <Text className="mt-1 text-sm text-gray-700">{message}</Text>
-        </View>
-      </View>
-    </View>
+    <div className={\`rounded-xl border \${borderColor} \${bgColor} p-4 w-[250px]\`}>
+      <div className="flex items-start gap-2">
+        {icon}
+        <div className="flex-1">
+          <strong className={\`block text-sm font-semibold \${textColor}\`}>{title}</strong>
+          <p className="mt-1 text-xs text-gray-700">{message}</p>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default Alert;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Alert from "./components/Alert/GalaxyAlert";
+import Alert from "./components/Comp/Alert/GalaxyAlert";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Alert />
       {/* 
       <Alert type="success" title="Success!" message="Everything is on track." />
       <Alert type="warning" title="Warning!" message="Check your settings." />
       <Alert type="failure" title="Error!" message="Something went wrong." /> 
       */}
-    </View>
+    </div>
   );
 };
 
@@ -212,53 +202,51 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text } from "react-native";
 
-const Alert = ({ type, title, message }) => {
+const Alert = ({ type = "success", title, message }) => {
   const alertStyles = {
     success: {
       bgColor: "bg-green-50",
-      borderColor: "border-green-400",
-      border: "border-l-4",
+      borderColor: "border-green-500",
+      border: "border-l-4"
     },
     warning: {
       bgColor: "bg-yellow-50",
-      borderColor: "border-yellow-400",
-      border: "border-l-4",
+      borderColor: "border-yellow-500",
+      border: "border-l-4"
     },
     failure: {
       bgColor: "bg-red-50",
-      borderColor: "border-red-400",
-      border: "border-l-4",
-    },
+      borderColor: "border-red-500",
+      border: "border-l-4"
+    }
   };
 
-  const { bgColor, borderColor, border } =
-    alertStyles[type] || alertStyles.success;
+  const { bgColor, borderColor, border } = alertStyles[type] || alertStyles.success;
+
   return (
-    <View className={\`rounded-xl \${bgColor} \${borderColor} \${border} p-4 w-64\`}>
-      <Text className="text-lg font-bold">{title}</Text>
-      <Text className="mt-1 text-sm">{message}</Text>
-    </View>
+    <div className={\`rounded-xl \${border} \${borderColor} \${bgColor} p-4 w-[300px]\`}>
+      <strong className="block text-lg font-bold">{title}</strong>
+      <p className="mt-1 text-sm">{message}</p>
+    </div>
   );
 };
 
 export default Alert;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Alert from "./components/Alert/KrytharWailAlert";
+import Alert from "./components/comp/Alert/KrytharWailAlert";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Alert />
       {/* 
       <Alert type="success" title="Success!" message="Everything is on track." />
       <Alert type="warning" title="Warning!" message="Check your settings." />
       <Alert type="failure" title="Error!" message="Something went wrong." /> 
       */}
-    </View>
+    </div>
   );
 };
 
@@ -280,36 +268,36 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Image } from "react-native";
 
 const Avatar = () => {
   return (
-    <View className="w-16 h-16 rounded-full bg-gray-200 flex justify-center items-center overflow-hidden">
-      <Image
-        source={require("../../assets/images/alien1.avif")}
-        className="w-full h-full object-cover"
+    <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200 flex justify-center items-center">
+      <img
+        src="/images/alien1.avif"
+        alt="Avatar Image"
+        width={64}
+        height={64}
+        className="object-cover"
       />
-    </View>
+    </div>
   );
 };
 
 export default Avatar;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Avatar from "./components/Avatar/GalaxyAvatar";
+import Avatar from "./components/comp/Avatar/GalaxyAvatar";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Avatar />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.GalaxyAvatar />,
       },
       {
@@ -318,50 +306,46 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text, Image } from "react-native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { PiAlienBold } from "react-icons/pi";
 
 const Avatar = () => {
   return (
-    <View className="flex-row items-center gap-2">
-      <View className="w-16 h-16 rounded-full bg-gray-200 flex justify-center items-center overflow-hidden">
-        <Image
-          source={require("../../assets/images/alien1.avif")}
-          className="w-full h-full object-cover"
+    <div className="flex items-center gap-2">
+      <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200 flex justify-center items-center">
+        <img
+          src="/images/alien1.avif"
+          alt="Avatar Image"
+          width={64}
+          height={64}
+          className="object-cover"
         />
-      </View>
-      <View>
-        <Text className="text-xs text-gray-700">Good morning</Text>
-        <Text className="font-semibold text-base">
-          Zyphorax
-          <MaterialCommunityIcons
-            name="alien-outline"
-            size={16}
-            color="black"
-          />
-        </Text>
-      </View>
-    </View>
+      </div>
+      <div>
+        <p className="text-xs text-gray-700">Good morning</p>
+        <div className="flex items-center">
+          <p className="font-semibold text-base mr-1">Zyphorax</p>
+          <PiAlienBold />
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default Avatar;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Avatar from "./components/Avatar/EarthAvatar";
+import Avatar from "./components/comp/Avatar/EarthAvatar";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Avatar />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.EarthAvatar />,
       },
     ],
@@ -380,40 +364,41 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text } from "react-native";
 
-const Badge = ({ text = "Badge", bgColor = "bg-black", textColor = "text-white", width = "w-20", padding = "px-2 py-1" }) => {
+const Badge = ({
+  text = "Badge",
+  bgColor = "bg-black",
+  textColor = "text-white",
+  width = "w-[80px]",
+  padding = "px-2 py-1"
+}) => {
   return (
-    <View
-      className={\`rounded-full flex items-center justify-center \${bgColor}  \${width} \${padding}\`}
-    >
-      <Text className={\`text-xs \${textColor}\`}>{text}</Text>
-    </View>
+    <div className={\`rounded-full flex justify-center items-center \${bgColor} \${width} \${padding}\`}>
+      <p className={\`text-xs \${textColor}\`}>{text}</p>
+    </div>
   );
 };
 
 export default Badge;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Badge from "./components/Badge/GalaxyBadge";
+import Badge from "./components/comp/Badge/GalaxyBadge";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Badge />
       {/*
       <Badge text="New" bgColor="bg-green-500" />
       <Badge text="Sale" bgColor="bg-red-500" border="border border-red-700" />
       <Badge text="Info" bgColor="bg-blue-500" width="w-24" />
       */}
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.GalaxyBadge />,
       },
     ],
@@ -431,54 +416,53 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { HiChevronRight } from "react-icons/hi";
 
 const Breadcrumb = () => {
   return (
-    <View className="flex flex-row items-center">
-      <TouchableOpacity>
-        <Text className="text-gray-600 text-sm">Home</Text>
-      </TouchableOpacity>
-      <Ionicons
-        name="chevron-forward"
-        size={12}
-        color="black"
-        className="mx-1 mt-[6px]"
-      />
-      <TouchableOpacity>
-        <Text className="text-gray-600 text-sm">Nebula</Text>
-      </TouchableOpacity>
-      <Ionicons
-        name="chevron-forward"
-        size={12}
-        color="black"
-        className="mx-1 mt-[6px]"
-      />
-      <TouchableOpacity>
-        <Text className="text-gray-600 text-sm">Galaxy</Text>
-      </TouchableOpacity>
-    </View>
+    <nav aria-label="Breadcrumb">
+      <ol className="flex items-center gap-1 text-sm text-gray-600">
+        <li>
+          <a href="#" className="block transition hover:text-gray-700">
+            Home
+          </a>
+        </li>
+        <li className="rtl:rotate-180">
+          <HiChevronRight className="w-4 h-4" />
+        </li>
+        <li>
+          <a href="#" className="block transition hover:text-gray-700">
+            Nebula
+          </a>
+        </li>
+        <li className="rtl:rotate-180">
+          <HiChevronRight className="w-4 h-4" />
+        </li>
+        <li>
+          <a href="#" className="block transition hover:text-gray-700">
+            Galaxy
+          </a>
+        </li>
+      </ol>
+    </nav>
   );
-};
+}
 
 export default Breadcrumb;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Breadcrumb from "./components/Breadcrumb/GalaxyBreadcrumb";
+import Breadcrumb from "./components/comp/Breadcrumb/GalaxyBreadcrumb";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Breadcrumb />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.GalaxyBreadcrumb />,
       },
       {
@@ -487,54 +471,53 @@ export default App;
         designer: "",
         developer: "",
         code: `import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { LuSlash } from "react-icons/lu";
 
 const Breadcrumb = () => {
   return (
-    <View className="flex flex-row items-center">
-      <TouchableOpacity>
-        <Text className="text-gray-600 text-sm">Home</Text>
-      </TouchableOpacity>
-      <MaterialCommunityIcons
-        name="slash-forward"
-        size={12}
-        color="black"
-        className="mx-1 mt-1"
-      />
-      <TouchableOpacity>
-        <Text className="text-gray-600 text-sm">Nebula</Text>
-      </TouchableOpacity>
-      <MaterialCommunityIcons
-        name="slash-forward"
-        size={12}
-        color="black"
-        className="mx-1 mt-1"
-      />
-      <TouchableOpacity>
-        <Text className="text-gray-600 text-sm">Galaxy</Text>
-      </TouchableOpacity>
-    </View>
+    <nav aria-label="Breadcrumb">
+      <ol className="flex items-center gap-1 text-sm text-gray-600">
+        <li>
+          <a href="#" className="block transition hover:text-gray-700">
+            Home
+          </a>
+        </li>
+        <li className="rtl:rotate-180">
+          <LuSlash className="w-4 h-4 text-black" />
+        </li>
+        <li>
+          <a href="#" className="block transition hover:text-gray-700">
+            Nebula
+          </a>
+        </li>
+        <li className="rtl:rotate-180">
+          <LuSlash className="w-4 h-4 text-black" />
+        </li>
+        <li>
+          <a href="#" className="block transition hover:text-gray-700">
+            Galaxy
+          </a>
+        </li>
+      </ol>
+    </nav>
   );
 };
 
 export default Breadcrumb;
 `,
         code1: `import React from "react";
-import { View } from "react-native";
-import Breadcrumb from "./components/Breadcrumb/EarthBreadcrumb";
+import Breadcrumb from "./components/comp/Breadcrumb/EarthBreadcrumb";
 
 const App = () => {
   return (
-    <View>
+    <div>
       <Breadcrumb />
-    </View>
+    </div>
   );
 };
 
 export default App;
 `,
-
         render: <Comp.EarthBreadcrumb />,
       },
     ],
