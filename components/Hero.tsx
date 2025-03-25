@@ -24,7 +24,7 @@ function Hero() {
             <p>✅ No setup</p>
           </div>
           <p className="text-white lg:text-base text-sm">
-            Just copy and paste components to build your next mobile app.
+            Just copy and paste components to build your next web app.
           </p>
           <div className="mt-6 flex-row flex items-center gap-3 justify-center">
             <Link href="/comp" prefetch>
