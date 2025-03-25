@@ -60,7 +60,7 @@ const VariantBlock = ({ variant }: { variant: any }) => {
       <h1 className="text-2xl font-semibold sm:text-3xl">{variant.name}</h1>
       <p className="mt-2 text-md text-gray-800">{variant.description}</p>
 
-      <div className="mt-6 w-full">
+      <div className="mt-6">
         <h1 className="text-xl font-semibold sm:text-2xl">Preview</h1>
         <div className="w-full py-6 px-6 flex flex-col items-center justify-center rounded-md h-auto border border-black mt-2">
           {variant.render}
