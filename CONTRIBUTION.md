@@ -1,4 +1,4 @@
-# Contributing to AlienUI
+# Contributing to AlienUI React
 
 Thank you for considering contributing to **AlienUI React**! Your contributions play a vital role in building a cutting-edge, inclusive, and highly customizable UI component library. This guide outlines how to get started and ensures a seamless contribution process for everyone involved.
 
@@ -84,7 +84,7 @@ Thank you for considering contributing to **AlienUI React**! Your contributions 
 
 ## Show Your Support
 
-If you love AlienUI, consider giving the repository a ⭐ on GitHub! It motivates us to keep improving and building the component library.
+If you love AlienUI React, consider giving the repository a ⭐ on GitHub! It motivates us to keep improving and building the component library.
 **How to give the repository a star:**
 
 - Navigate to the top of the AlienUI React repository.

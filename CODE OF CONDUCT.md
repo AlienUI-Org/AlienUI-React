@@ -2,7 +2,7 @@
 
 ## Our Commitment
 
-At **AlienUI**, we are committed to fostering a welcoming, inclusive, and respectful environment for everyone involved in our community. Whether you are a user, contributor, or maintainer, we aim to create a harassment-free experience for all individuals regardless of age, body size, disability, ethnicity, gender identity or expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual orientation.
+At **AlienUI React**, we are committed to fostering a welcoming, inclusive, and respectful environment for everyone involved in our community. Whether you are a user, contributor, or maintainer, we aim to create a harassment-free experience for all individuals regardless of age, body size, disability, ethnicity, gender identity or expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual orientation.
 
 ## Our Standards
 
@@ -24,7 +24,7 @@ The following behaviors are considered unacceptable:
 
 ## Responsibilities of Maintainers
 
-Maintainers of **AlienUI** are tasked with defining and upholding the standards of this Code of Conduct. Responsibilities include:
+Maintainers of **AlienUI React** are tasked with defining and upholding the standards of this Code of Conduct. Responsibilities include:
 
 - Responding promptly and fairly to issues or behavior that violates this Code of Conduct.
 - Taking appropriate corrective actions, including warning, editing, or removing contributions, or banning individuals whose actions harm the community.

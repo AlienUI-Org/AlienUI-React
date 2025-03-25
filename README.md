@@ -9,7 +9,7 @@ A lightweight open-source UI component library built on Tailwind CSS for React w
 ### **1. Zero Dependencies**
 
 - No external dependencies required.
-- Fully functional with just React Native and **Tailwind CSS** installed.
+- Fully functional with just React and **Tailwind CSS** installed.
 - Simplifies integration into any project.
 
 ### **2. Native Tags for Components**
@@ -51,7 +51,7 @@ A lightweight open-source UI component library built on Tailwind CSS for React w
 
 ## Components
 
-AlienUI has a wide range of freely available components. These components include:
+AlienUI React has a wide range of freely available components. These components include:
 
 - [Accordion](https://alienui-react.vercel.app/compdetails/Accordion)
 - [Alert](https://alienui-react.vercel.app/compdetails/Alert)
