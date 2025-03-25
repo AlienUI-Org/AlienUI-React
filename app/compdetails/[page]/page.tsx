@@ -62,7 +62,7 @@ const VariantBlock = ({ variant }: { variant: any }) => {
 
       <div className="mt-6">
         <h1 className="text-xl font-semibold sm:text-2xl">Preview</h1>
-        <div className="w-full py-6 px-3 flex flex-col items-center justify-center rounded-md h-auto border border-black mt-2">
+        <div className="w-full py-6 px-6 flex flex-col items-center justify-center rounded-md h-auto border border-black mt-2">
           {variant.render}
         </div>
       </div>

@@ -10,8 +10,8 @@ export default function ResponsiveNavbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="bg-black text-white sticky top-0 z-10 p-4">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <nav className="w-full bg-black text-white sticky top-0 z-10 p-4">
+      <div className=" flex justify-between items-center">
         <Link href="/" className="text-xl font-bold">
           AlienX
         </Link>
