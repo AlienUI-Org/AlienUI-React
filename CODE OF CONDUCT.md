@@ -1,4 +1,4 @@
-# AlienUI Code of Conduct
+# AlienUI React Code of Conduct
 
 ## Our Commitment
 
