@@ -1181,7 +1181,7 @@ const Input = () => {
   return (
     <div>
       <input
-        className="border-1 border-b border-b-gray-600 p-2"
+        className="border-b border-b-gray-600 p-2"
         placeholder="Earth Input..."
       />
     </div>
