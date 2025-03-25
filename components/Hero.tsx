@@ -1,38 +1,36 @@
 import React from "react";
 import Link from "next/link";
+import { GiAlienStare } from "react-icons/gi";
 
 function Hero() {
   return (
     <section className="bg-gradient-to-b from-purple-500 via-black to-black">
-      <div className="max-w-7xl mx-auto px-4 py-20 md:py-24 lg:py-28 flex flex-col items-center md:justify-between">
-        <div className="text-center">
-          <h1 className="text-5xl font-bold text-white sm:text-5xl mb-2">
-            AlienUI React
-          </h1>
-          <p className="text-white lg:text-xl text-lg text-center font-semibold">
-            Free open-source UI component library for React
-          </p>
-          <p className="mt-4 lg:text-lg text-base text-white text-center font-medium lg:w-[1000px]">
-            A lightweight open-source UI component library built on Tailwind CSS
-            for React web apps. It leverages native tags for seamless
-            integration and maintains zero to minimal dependencies, enabling
-            high-performance, and stunning interfaces with ease.
-          </p>
-          <div className="flex items-center lg:text-base text-sm gap-3 justify-center mt-6 mb-4 text-white">
-            <p>✅ No npm installation</p>
-            <p>✅ No configuration</p>
-            <p>✅ No setup</p>
+      <div className="max-w-7xl mx-auto px-4 py-28 md:py-24 lg:py-32 flex flex-col items-center md:justify-between">
+        <div className="flex flex-col justify-center items-center">
+          <div className="w-42 h-10 py-4 px-4 rounded-full  bg-black flex justify-center items-center gap-1 mb-4">
+            {" "}
+            <p className="text-base font-bold text-white">AlienUI React</p>
+            <GiAlienStare size={18} className="text-white animate-pulse" />
           </div>
-          <p className="text-white lg:text-base text-sm">
-            Just copy and paste components to build your next web app.
+
+          <p className="text-white lg:text-xl text-lg text-center font-semibold">
+            UI component library built on Tailwind CSS for React
           </p>
+          <p className="mt-4 lg:text-5xl text-3xl text-white text-center font-bold lg:w-[1000px]">
+            Build{" "}
+            <span className="bg-gradient-to-t from-purple-800 via-gray-300 to-white bg-clip-text text-transparent">
+              Stunning
+            </span>{" "}
+            Web apps
+          </p>
+
           <div className="mt-6 flex-row flex items-center gap-3 justify-center">
             <Link href="/comp" prefetch>
               <button className="px-4 py-3 bg-white  font-medium rounded-lg shadow-md cursor-pointer">
                 Get Started
               </button>
             </Link>
-            <Link href="https://github.com/AlienUI-Org/AlienUI-React" prefetch>
+            <Link href="https://github.com/khaymanii/AlienUI" prefetch>
               <button className="px-4 py-3 bg-purple-800 text-white font-medium rounded-lg shadow-md cursor-pointer">
                 Start Contributing
               </button>
