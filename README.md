@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AlienUI React👽
 
-## Getting Started
+A lightweight open-source UI component library built on Tailwind CSS for React web apps. It leverages native tags for seamless integration and maintains zero to minimal dependencies, enabling high-performance, and stunning interfaces with ease.
 
-First, run the development server:
+![auir](public/images/auir.jpg)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **1. Zero Dependencies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- No external dependencies required.
+- Fully functional with just React Native and **Tailwind CSS** installed.
+- Simplifies integration into any project.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### **2. Native Tags for Components**
 
-## Learn More
+- Built entirely on native React components like `div`, `h1`, `span`, `p`, etc.
+- Ensures compatibility with all React environments.
 
-To learn more about Next.js, take a look at the following resources:
+### **3. Lightweight and Performant**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Minimal overhead for faster web app performance.
+- Ideal for MVPs, small-scale projects, or large web apps requiring lightweight components.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **4. Customization-Friendly**
 
-## Deploy on Vercel
+- Provides fully customizable components.
+- Works seamlessly with styling libraries like **Tailwind CSS**.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **5. Plug-and-Play**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- No setup or configuration required.
+- Just import the components and start building.
+
+### **6. Comprehensive Documentation**
+
+- Easy-to-follow documentation to help you get started quickly.
+- Includes usage examples, code snippets, and preview.
+
+### **7. Ready-to-Use Component Variants**
+
+- Pre-designed components with multiple variants for buttons, inputs, and more.
+- Examples include:
+  - **Galaxy and Earth Button**
+  - **Nebulon and Earth Input**
+
+### **8. Self-Hosted and Independent**
+
+- No reliance on third-party servers or APIs.
+- Gives developers full control over the library and its components.
+
+## Components
+
+AlienUI has a wide range of freely available components. These components include:
+
+- [Accordion](https://alienui-react.vercel.app/compdetails/Accordion)
+- [Alert](https://alienui-react.vercel.app/compdetails/Alert)
+- [Avatar](https://alienui-react.vercel.app/compdetails/Avatar)
+- [Badge](https://alienui-react.vercel.app/compdetails/Badge)
+- [Breadcrumb](https://alienui-react.vercel.app/compdetails/Breadcrumb)
+- [Button](https://alienui-react.vercel.app/compdetails/Button)
+- [Card](https://alienui-react.vercel.app/compdetails/Card)
+- [Carousel](https://alienui-react.vercel.app/compdetails/Carousel)
+- [Checkbox](https://alienui-react.vercel.app/compdetails/Checkbox)
+- [Dropdown](https://alienui-react.vercel.app/compdetails/Dropdown)
+- [Input](https://alienui-react.vercel.app/compdetails/Input)
+- [Modal](https://alienui-react.vercel.app/compdetails/Modal)
+- [Notification](https://alienui-react.vercel.app/compdetails/Notification)
+- [Pagination](https://alienui-react.vercel.app/compdetails/Pagination)
+- [Popover](https://alienui-react.vercel.app/compdetails/Popover)
+- [Progress Bar](https://alienui-react.vercel.app/compdetails/Progress)
+- [Search Bar](https://alienui-react.vercel.app/compdetails/Search)
+- [Spinner](https://alienui-react.vercel.app/compdetails/Spinner)
+- [Switch](https://alienui-react.vercel.app/compdetails/Switch)
+- [Table](https://alienui-react.vercel.app/compdetails/Table)
+- [Toast](https://alienui-react.vercel.app/compdetails/Toast)
+
+## Contributing
+
+Contributors can contribute by adding new components, fixing bugs or improving the documentation. Please create an issue before starting any work. Once you get approval on your issue, you can create a new branch and submit your changes in a PR. Please note that all PRs need to be reviewed.
+
+A detailed contribution guide is found in [CONTRIBUTION.md](https://github.com/khaymanii/AlienUI-React/blob/main/CONTRIBUTION.md)
+
+## License
+
+AlienUI React is an open source project licensed under the [MIT LICENSE](https://github.com/khaymanii/AlienUI-React/blob/main/LICENSE)
