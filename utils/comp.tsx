@@ -14,9 +14,6 @@ import GalaxyAccordion from "@/components/comp/Accordion/GalaxyAccordion";
 import GalaxyPagination from "@/components/comp/Pagination/GalaxyPagination";
 import MarsPagination from "@/components/comp/Pagination/MarsPagination";
 import GalaxyProgressBar from "@/components/comp/Progress Bar/GalaxyProgressBar";
-import GalaxyTab from "@/components/comp/Tab/GalaxyTab";
-import EarthTab from "@/components/comp/Tab/EarthTab";
-import JupiterTab from "@/components/comp/Tab/JupiterTab";
 import GalaxyCard from "@/components/comp/Card/GalaxyCard";
 import EarthCard from "@/components/comp/Card/EarthCard";
 import JupiterCard from "@/components/comp/Card/JupiterCard";
@@ -57,8 +54,6 @@ export const Comp = {
   GalaxyProgressBar,
   EarthProgressBar,
   MarsProgressBar,
-  GalaxyTab,
-  EarthTab,
   GalaxyCard,
   EarthCard,
   JupiterCard,
@@ -77,5 +72,4 @@ export const Comp = {
   GalaxySearchBar,
   NebulaNotification,
   VortexInput,
-  JupiterTab,
 };
