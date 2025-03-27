@@ -15,7 +15,7 @@ export default function LandingPageCompDisplayTwo() {
         <p className="mt-4 text-base text-gray-800">
           Integrate pre-built, high-quality components quickly by copying and
           pasting. Save time, ensure consistency, and customize easily with
-          Nativewind classes.{" "}
+          Tailwind classes.{" "}
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-6">
