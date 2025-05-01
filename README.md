@@ -2,7 +2,7 @@
 
 A lightweight open-source UI component library built on Tailwind CSS for React web apps. It leverages native tags for seamless integration and maintains zero to minimal dependencies, enabling high-performance, and stunning interfaces with ease.
 
-![auir](public/images/auir.jpg)
+![1000751970](https://github.com/user-attachments/assets/bbe896b6-a3d7-492b-9b41-8b731eb49c10)
 
 ## Features
 
