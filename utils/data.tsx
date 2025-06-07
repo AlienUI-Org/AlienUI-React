@@ -1129,8 +1129,124 @@ export default App;
       },
     ],
   },
-  input: {
+  form: {
     id: 11,
+    name: "Form",
+    icon: AlienUIIcons.AlienLiaRedditAlien,
+    description: "A customizable form component for entering text and data.",
+    variants: [
+      {
+        name: "Galaxy Form",
+        description: "An input form for entering text in the galaxy.",
+        designer: "",
+        developer: "",
+        code: `const Form = () => {
+  return (
+    <div className="min-h-screen flex items-center justify-center py-20 px-4">
+      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+          Create an Account
+        </h2>
+        <form className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              FullName <span className="text-red-600">*</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter FullName"
+              className="w-full p-2 border border-gray-300 rounded mt-1"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Your Email <span className="text-red-600">*</span>
+            </label>
+            <input
+              type="email"
+              placeholder="name@example.com"
+              className="w-full p-2 border border-gray-300 rounded mt-1"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Password <span className="text-red-600">*</span>
+            </label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              className="w-full p-2 border border-gray-300 rounded mt-1"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Confirm Password <span className="text-red-600">*</span>
+            </label>
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              className="w-full p-2 border border-gray-300 rounded mt-1"
+              required
+            />
+          </div>
+
+          <div></div>
+
+          <button
+            type="submit"
+            className="w-full bg-black text-white py-2 rounded cursor-pointer"
+          >
+            Create Account
+          </button>
+        </form>
+
+        <p className="mt-6 text-center text-sm text-gray-600">
+          Already have an account?{" "}
+          <a
+            href="/login"
+            className="text-teal-500 hover:underline font-medium"
+          >
+            Login
+          </a>
+        </p>
+
+        <p className="mt-6 text-center text-xs text-gray-400">
+          © Copyright 2025&nbsp;
+          <span className="font-semibold text-gray-600">AlienUI Org.</span>
+          &nbsp;All Rights Reserved.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Form;
+`,
+        code1: `import React from "react";
+import Form from "./components/comp/Form/GalaxyForm";
+
+const App = () => {
+  return (
+    <div>
+      <Form />
+    </div>
+  );
+};
+
+export default App;
+`,
+        render: <Comp.GalaxyForm />,
+      },
+    ],
+  },
+  input: {
+    id: 12,
     name: "Input",
     icon: AlienUIIcons.AlienEgg,
     description: "A collection of cosmic-themed input components",
@@ -1270,7 +1386,7 @@ export default App;
     ],
   },
   modal: {
-    id: 12,
+    id: 13,
     name: "Modal",
     icon: AlienUIIcons.AlienSkull,
     description:
@@ -1349,7 +1465,7 @@ export default App;
     ],
   },
   navbar: {
-    id: 13,
+    id: 14,
     name: "Navbar",
     icon: AlienUIIcons.AlienReddit,
     description: "A customizable navbar with navigation links and buttons.",
@@ -1481,7 +1597,7 @@ export default App;
     ],
   },
   notification: {
-    id: 14,
+    id: 15,
     name: "Notification",
     icon: AlienUIIcons.AlienStare,
     description:
@@ -1544,7 +1660,7 @@ export default App;
     ],
   },
   pagination: {
-    id: 15,
+    id: 16,
     name: "Pagination",
     icon: AlienUIIcons.AlienCrackedAlienSkull,
     description: "A customizable pagination component.",
@@ -1682,7 +1798,7 @@ export default App;
     ],
   },
   popover: {
-    id: 16,
+    id: 17,
     name: "Popover",
     icon: AlienUIIcons.AlienPiAlienBold,
     description: "A customizable popover component.",
@@ -1762,7 +1878,7 @@ export default App;
     ],
   },
   progressbar: {
-    id: 17,
+    id: 18,
     name: "Progress",
     icon: AlienUIIcons.AlienTbAlien,
     description:
@@ -1955,7 +2071,7 @@ export default App;
     ],
   },
   searchbar: {
-    id: 18,
+    id: 19,
     name: "Search",
     icon: AlienUIIcons.AlienStare,
     description: "A customizable search bar.",
@@ -2000,7 +2116,7 @@ export default App;
     ],
   },
   spinner: {
-    id: 19,
+    id: 20,
     name: "Spinner",
     icon: AlienUIIcons.AlienLiaRedditAlien,
     description:
@@ -2094,7 +2210,7 @@ export default App;
     ],
   },
   switch: {
-    id: 20,
+    id: 21,
     name: "Switch",
     icon: AlienUIIcons.AlienPiAlienThin,
     description: "A customizable switch for enabling and disabling options.",
@@ -2145,7 +2261,7 @@ export default App;
     ],
   },
   table: {
-    id: 21,
+    id: 22,
     name: "Table",
     icon: AlienUIIcons.AlienBug,
     description: "A customizable table component for data storage",
@@ -2215,7 +2331,7 @@ export default App;
     ],
   },
   toast: {
-    id: 22,
+    id: 23,
     name: "Toast",
     icon: AlienUIIcons.AlienPiAlienLight,
     description:

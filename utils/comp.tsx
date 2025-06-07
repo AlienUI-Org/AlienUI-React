@@ -35,7 +35,7 @@ import NebulaNotification from "@/components/comp/Notification/NebulaNotificatio
 import VortexInput from "@/components/comp/Input/VortexInput";
 import GalaxyNavbar from "@/components/comp/Navbar/GalaxyNavbar";
 import EarthNavbar from "@/components/comp/Navbar/EarthNavbar";
-
+import GalaxyForm from "@/components/comp/Form/GalaxyForm";
 export const Comp = {
   EarthButton,
   GalaxyButton,
@@ -74,4 +74,5 @@ export const Comp = {
   VortexInput,
   GalaxyNavbar,
   EarthNavbar,
+  GalaxyForm,
 };
