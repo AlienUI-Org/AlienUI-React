@@ -63,6 +63,7 @@ AlienUI React has a wide range of freely available components. These components 
 - [Carousel](https://alienui-react.vercel.app/compdetails/Carousel)
 - [Checkbox](https://alienui-react.vercel.app/compdetails/Checkbox)
 - [Dropdown](https://alienui-react.vercel.app/compdetails/Dropdown)
+- [Form](https://alienui-react.vercel.app/compdetails/Form)
 - [Input](https://alienui-react.vercel.app/compdetails/Input)
 - [Modal](https://alienui-react.vercel.app/compdetails/Modal)
 - [Notification](https://alienui-react.vercel.app/compdetails/Notification)
