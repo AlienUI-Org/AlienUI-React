@@ -1,15 +1,52 @@
-name: CI/CD Pipeline
+name: CI/CD Application Deployment
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-  docker:
+
+  # -------------------
+  # CI JOB
+  # -------------------
+  ci:
+    name: Continuous Integration
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: |
+          if npm run | grep -q test; then
+            npm test
+          else
+            echo "No tests found, skipping..."
+          fi
+
+      - name: Build app
+        run: npm run build
+
+  # -------------------
+  # CD JOB
+  # -------------------
+  cd:
+    name: Docker Build, Push & Deploy to EC2
+    runs-on: ubuntu-latest
+    needs: ci
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -21,4 +58,29 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/alienui-react
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/alienui-react:0.1
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/alienui-react:0.1
+          cache-to: type=inline
+
+      - name: Setup SSH Key
+        run: |
+          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_HOST }} << "EOF"
+
+          sudo docker stop alienui-react || true
+          sudo docker rm alienui-react || true
+
+          sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/alienui-react:0.1
+
+          sudo docker run -d \
+            --name alienui \
+            -p 80:3000 \
+            --restart unless-stopped \
+            ${{ secrets.DOCKERHUB_USERNAME }}/alienui-react:0.1
+
+          EOF
